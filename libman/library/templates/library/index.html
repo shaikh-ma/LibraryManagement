@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+</head>
+<body>
+    <style>
+        table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        }
+        th{
+            background-color: cornflowerblue;
+            color: white;
+            padding: 10px;
+        }
+        input[type=button], input[type=submit]{
+            padding : 10px;
+            border-radius: 15px;
+            background-color: cornflowerblue;
+            color: white;
+        }
+    </style>
+    <input type="text" id="searchbook" onkeyup="findBook()" placeholder="Search for book.." title="Type in book name">
+    <br/>
+    <br/>
+    <table id="BooksTable" style="width:100%; text-align:center">
+      <tr>
+        <th>Book Title</th>
+        <th>Book Author</th>
+        <th>No. of copies</th>
+        <th>Available copies</th>
+        <th>Action</th>
+      </tr>
+      {% for book in books %}
+      <tr id="booktitle">
+          <td>{{book.title}}</td>
+          <td>{{book.author}}</td>
+          <td>{{book.number_of_copies}}</td>
+          <td>{{book.available_copies}}</td>
+          <td><input type="button" value="Borrow it"/></td>
+      </tr>
+      {% endfor %}
+    </table>
+    <br/>
+    <input type="button" id="newbook" value="Add book" onclick="toggleform()"/>
+    <form id="addbook" method="post" action="add_book" style="display: none;">
+        <div style="content-align: center;">
+            <label for="newbooktitle">Book Title</label>
+          <input for="newbooktitle" type="text" placeholder="Book title" required/>
+          <br/>
+          <label for="newbookauthor">Book Author</label>
+          <input for="newbookauthor" type="text" placeholder="Book Author" required/>
+          <br/>
+          <label for="numcopies">No. of Copies</label>
+          <input for="numcopies" type="text" placeholder="100" required/>
+          <br/>
+          <label for="availcopies">Available Copies</label>
+          <input for="availcopies" type="text" placeholder="100" required/>
+          <br/>
+          <input type="submit" value="Submit"/>
+        </div>
+    </form>
+</body>
+
+<script>
+function toggleform(){
+    if (document.getElementById("addbook").style.display == "block"){
+        document.getElementById("addbook").style.display = "none";
+        document.getElementById("newbook").value = "Add book"
+    }
+    else {
+        document.getElementById("addbook").style.display = "block";
+        document.getElementById("newbook").value = "Cancel"
+    }
+}
+
+function findBook() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchbook");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("BooksTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+        } else {
+        tr[i].style.display = "none";
+        }
+    }
+    }
+}
+    </script>
+</html>
