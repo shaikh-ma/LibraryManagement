@@ -49,38 +49,9 @@
       {% endfor %}
     </table>
     <br/>
-    <input type="button" id="newbook" value="Add book" onclick="toggleform()"/>
-    <form id="addbook" method="post" action="add_book" style="display: none;">
-        <div style="content-align: center;">
-            <label for="newbooktitle">Book Title</label>
-          <input for="newbooktitle" type="text" placeholder="Book title" required/>
-          <br/>
-          <label for="newbookauthor">Book Author</label>
-          <input for="newbookauthor" type="text" placeholder="Book Author" required/>
-          <br/>
-          <label for="numcopies">No. of Copies</label>
-          <input for="numcopies" type="text" placeholder="100" required/>
-          <br/>
-          <label for="availcopies">Available Copies</label>
-          <input for="availcopies" type="text" placeholder="100" required/>
-          <br/>
-          <input type="submit" value="Submit"/>
-        </div>
-    </form>
 </body>
 
 <script>
-function toggleform(){
-    if (document.getElementById("addbook").style.display == "block"){
-        document.getElementById("addbook").style.display = "none";
-        document.getElementById("newbook").value = "Add book"
-    }
-    else {
-        document.getElementById("addbook").style.display = "block";
-        document.getElementById("newbook").value = "Cancel"
-    }
-}
-
 function findBook() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("searchbook");
