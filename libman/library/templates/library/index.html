@@ -40,7 +40,11 @@
           <td>{{book.author}}</td>
           <td>{{book.number_of_copies}}</td>
           <td>{{book.available_copies}}</td>
-          <td><input type="button" value="Borrow it"/></td>
+          {% if book.available_copies > 0 %}
+              <td><input type="button" value="Borrow it"/></td>
+          {% else %}
+          <td><p>Not available.</p></td>
+          {% endif %}
       </tr>
       {% endfor %}
     </table>
