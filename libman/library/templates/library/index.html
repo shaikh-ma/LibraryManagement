@@ -1,12 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library</title>
-</head>
-<body>
-    <style>
+{% extends 'library/base.html' %}
+{% load static %}
+{% block content %}
+ <style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 80%;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+
         table, th, td {
         border: 1px solid black;
         border-collapse: collapse;
@@ -26,29 +57,23 @@
     <input type="text" id="searchbook" onkeyup="findBook()" placeholder="Search for book.." title="Type in book name">
     <br/>
     <br/>
-    <table id="BooksTable" style="width:100%; text-align:center">
-      <tr>
-        <th>Book Title</th>
-        <th>Book Author</th>
-        <th>No. of copies</th>
-        <th>Available copies</th>
-        <th>Action</th>
-      </tr>
-      {% for book in books %}
-      <tr id="booktitle">
-          <td>{{book.title}}</td>
-          <td>{{book.author}}</td>
-          <td>{{book.number_of_copies}}</td>
-          <td>{{book.available_copies}}</td>
-          {% if book.available_copies > 0 %}
-              <td><input type="button" value="Borrow it"/></td>
-          {% else %}
-          <td><p>Not available.</p></td>
-          {% endif %}
-      </tr>
-      {% endfor %}
-    </table>
+    {% for book in books %}
+    <div class="card">
+        <img src="{% static 'library/book.png' %}" alt="{{ book.title }}" style="width:100px">
+        <h2 class="title">{{ book.title }}</h2>
+        <p>{{ book.author }}</p>
+        {% if book.is_available %}
+           <button style="background-color: green;color:white; padding:5px">Request Book</button>
+        {% else %}
+           <p style="background-color: red;color:white; padding:5px">Not available</p>
+        {% endif %}
+        {% if user.is_admin %}
+           <p style="background-color: green;color:white; padding:5px">Edit Book</p>
+        {% endif %}
+    </div>
     <br/>
+    {% endfor %}
+</div>
 </body>
 
 <script>
@@ -56,19 +81,27 @@ function findBook() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("searchbook");
     filter = input.value.toUpperCase();
-    table = document.getElementById("BooksTable");
-    tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-        txtValue = td.textContent || td.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-        } else {
-        tr[i].style.display = "none";
-        }
-    }
+    // books_list = document.getElementsByClassName('title');
+    //  for (book_title: books_list){
+    //     if (book_title.toUpperCase().indexOf(filter) > -1){
+
+    //     }
+    //  }
+   
+
+    // table = document.getElementById("BooksTable");
+    // tr = table.getElementsByTagName("tr");
+    // for (i = 0; i < tr.length; i++) {
+    // td = tr[i].getElementsByTagName("td")[0];
+    // if (td) {
+    //     txtValue = td.textContent || td.innerText;
+    //     if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    //     tr[i].style.display = "";
+    //     } else {
+    //     tr[i].style.display = "none";
+    //     }
+    // }
     }
 }
     </script>
-</html>
+{% endblock %}
