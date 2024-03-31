@@ -6,5 +6,5 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class BookListView(LoginRequiredMixin, ListView):
     model = Book
-    template_name = 'library/index.html'
+    template_name = 'library/home.html'
     context_object_name = 'books'

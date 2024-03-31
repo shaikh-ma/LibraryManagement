@@ -33,11 +33,14 @@ li a:hover {
 </head>
 <body>
   <div>
-    <img style="width: 120px;" src="{% static 'library/logo.png' %}"/>      <ul>
+    <img style="width: 120px;" src="{% static 'library/logo.png' %}"/>
+    <ul>
         <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="{% url 'profile' %}">My Profile</a></li>
         <li><a href="#">My Books</a></li>
+        {% if user.is_authenticate %}
         <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% endif %}
     </ul>
     </div>
     {% block content %}

@@ -1,0 +1,114 @@
+{% extends 'library/base.html' %}
+{% load static %}
+{% block content %}
+ <style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 80%;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+
+        table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        }
+        th{
+            background-color: cornflowerblue;
+            color: white;
+            padding: 10px;
+        }
+        input[type=button], input[type=submit]{
+            padding : 10px;
+            border-radius: 15px;
+            background-color: cornflowerblue;
+            color: white;
+        }
+    </style>
+    <input type="text" id="searchbook" onkeyup="findBook()" placeholder="Search for book.." title="Type in book name">
+    <br/>
+    <br/>
+    {% for book in books %}
+    <div class="card">
+        <img src="{% static 'library/book.png' %}" alt="{{ book.title }}" style="width:100px">
+        <h2 class="title">{{ book.title }}</h2>
+        <p>Author: {{ book.author }}</p>
+        <p>Book Id: {{ book.book_id }}</p>
+        {% if user.is_superuser %}
+        <div>
+          <span style="padding:2px">
+            <button onclick="alert('Edit')" style="background-color: green;color:white; padding:5px">Edit Book</button></span>
+          <span style="padding:2px">
+            <button onclick="alert('Delete')" style="background-color: red;color:white; padding:5px">Delete Book</button></span>
+        </div>
+        {% else %}
+          {% if book.is_available %}
+              <button style="background-color: green;color:white; padding:5px">Request Book</button>
+          {% else %}
+              <p style="background-color: red;color:white; padding:5px">Not available</p>
+          {% endif %}
+        {% endif %}
+    </div>
+    <br/>
+    {% endfor %}
+</div>
+</body>
+
+<script>
+function findBook() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchbook");
+    filter = input.value.toUpperCase();
+    // books_list = document.getElementsByClassName('title');
+    //  for (book_title: books_list){
+    //     if (book_title.toUpperCase().indexOf(filter) > -1){
+
+    //     }
+    //  }
+   
+
+    // table = document.getElementById("BooksTable");
+    // tr = table.getElementsByTagName("tr");
+    // for (i = 0; i < tr.length; i++) {
+    // td = tr[i].getElementsByTagName("td")[0];
+    // if (td) {
+    //     txtValue = td.textContent || td.innerText;
+    //     if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    //     tr[i].style.display = "";
+    //     } else {
+    //     tr[i].style.display = "none";
+    //     }
+    // }
+    }
+}
+    </script>
+{% endblock %}
