@@ -1,6 +1,8 @@
 from django import forms
+from .models import Request
 
 
-class RequestForm(forms.Form):
-    book_title = forms.CharField(label="Book Title")
-    user_id = forms.CharField(label="User ID")
+class RequestForm(forms.ModelForm):
+    class Meta:
+        model = Request
+        fields = ('request_user', 'request_book', 'return_date')

@@ -62,7 +62,7 @@ button:hover, a:hover {
         <img src="{% static 'library/book.png' %}" alt="{{ book.title }}" style="width:100px">
         <h2 class="title">{{ book.title }}</h2>
         <p>Author: {{ book.author }}</p>
-        <p>Book Id: {{ book.book_id }}</p>
+        <p>Book Code: {{ book.book_code }}</p>
         {% if user.is_superuser %}
         <div>
           <span style="padding:2px">

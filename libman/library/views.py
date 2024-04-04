@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import RequestForm
+from django.contrib.auth.decorators import login_required
+
 
 class BookListView(LoginRequiredMixin, ListView):
     model = Book
@@ -30,14 +32,14 @@ class UserRequestsListView(ListView):
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Request.objects.filter(issued_to=user)
+        return Request.objects.filter(request_user=user)
 
-
-def new_req(request):
+@login_required
+def new_request(request):
     if request.method == "POST":
         form = RequestForm(request.POST)
         if form.is_valid():
-            # form.save()
+            form.save()
             messages.success(request, f'Your request has been created!')
             return redirect('home')
     form = RequestForm()

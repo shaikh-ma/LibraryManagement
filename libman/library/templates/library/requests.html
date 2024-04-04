@@ -5,7 +5,9 @@
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">New Request</legend>
             {{ form|crispy }}
-            <input type="submit"/>
+            <br/>
+            <input style="background-color: green;color: white" type="submit"/>
+            <a href="{% url 'home' %}" style="padding:2px; display: inline;background-color: red;color:white">Cancel</a>
         </fieldset>
     </form>
 {% endblock content %}
