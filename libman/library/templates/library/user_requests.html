@@ -1,10 +1,23 @@
 {% extends "library/base.html" %}
 {% block content %}
-    {% for request in requests %}
-        <article class="media content-section">
-          <div class="media-body">
-            {{ user.name }}
-          </div>
-        </article>
+    <table style="border: solid;width: 100%;">
+      <th>
+        <tr>
+       <td  style="border: solid">Request id</td>
+       <td  style="border: solid">User Name</td>
+       <td  style="border: solid">Book title</td>
+       <td  style="border: solid">Request date</td>
+       <td  style="border: solid">Return date</td>
+      </tr>
+      </th>
+      {% for request in requests %}
+      <tr style="border: solid">
+       <td style="border: solid">{{ request.request_id }}</td>
+       <td style="border: solid">{{ request.request_user  }}</td>
+       <td style="border: solid">{{ request.request_book }}</td>
+       <td style="border: solid">{{ request.request_date }}</td>
+       <td style="border: solid">{{ request.return_date }}</td>
+  </tr>
     {% endfor %}
+  </table>
 {% endblock content %}
