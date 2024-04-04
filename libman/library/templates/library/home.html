@@ -72,7 +72,8 @@ button:hover, a:hover {
         </div>
         {% else %}
           {% if book.is_available %}
-              <button style="background-color: green;color:white; padding:5px">Request Book</button>
+              <button style="background-color: green;color:white; padding:5px">
+                <a style="background-color: green;color:white; padding:5px" href="{% url 'new-user-requests' %}">Request Book</a></button>
           {% else %}
               <p style="background-color: red;color:white; padding:5px">Not available</p>
           {% endif %}

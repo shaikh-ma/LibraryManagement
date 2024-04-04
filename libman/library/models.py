@@ -14,3 +14,17 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
+
+class Request(models.Model):
+    request_id = models.IntegerField(primary_key=True)
+    request_user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    request_book = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
+    request_date = models.DateField(auto_now=True, blank=True, null=True)
+    return_date = models.DateField(blank=True, null=True)
+    
+    def __str__(self):
+        return "{} - {} - {}".format(
+            self.request_id,
+            self.request_user,
+            self.request_book
+        )

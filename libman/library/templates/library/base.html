@@ -39,6 +39,7 @@ li a:hover {
         <li><a href="{% url 'profile' %}">My Profile</a></li>
         {% if user.is_authenticated %}
         <li><a href="{% url 'user-books' username=user %}">My Books</a></li>
+        <li><a href="{% url 'user-requests' username=user %}">My Requests</a></li>
         <li><a href="{% url 'logout' %}">Logout</a></li>
         {% endif %}
     </ul>
