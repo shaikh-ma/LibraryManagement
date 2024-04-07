@@ -22,6 +22,8 @@ class Request(models.Model):
     request_id = models.IntegerField(primary_key=True, auto_created=True)
     request_user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     request_book = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
+    request_book_title = models.CharField(max_length=200)
+    request_book_code = models.CharField(max_length=200)
     request_date = models.DateField(auto_now=True)
     return_date = models.DateField(default=timezone.now() + timezone.timedelta(days=10))
     is_approved = models.BooleanField(default=False)
@@ -30,5 +32,6 @@ class Request(models.Model):
         return "{} - {} - {}".format(
             self.request_id,
             self.request_user,
-            self.request_book
+            self.request_book_title,
+            self.request_book_code
         )

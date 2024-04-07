@@ -1,18 +1,22 @@
 {% extends 'library/base.html' %}
 {% load static %}
 {% block content %}
+  
+  <a style="background-color: green;color:white; padding:5px" href="{% url 'new-user-requests' %}">New Book Request</a>
+  <br/>
+  <br/>
 
   {% for book in books %}
-    <div class="card">
+    <div class="card" onclick="alert('To Do')">
         <h2 class="title">{{ book.title }}</h2>
         <h4>{{ book.author }}</h4>
         <img src="{% static 'library/book.png' %}" alt="{{ book.title }}" style="width:100px">
         <p>Book Code: {{ book.book_code }}</p>
-        {% if book.is_available %}
+        <!-- {% if book.is_available %}
           <a style="background-color: green;color:white; padding:5px" href="{% url 'new-user-requests' %}">Request Book</a>
         {% else %}
           <p style="background-color: red;color:white; padding:5px;">Not available</p>
-        {% endif %}
+        {% endif %} -->
     </div>
     &nbsp; &nbsp; &nbsp;
   {% endfor %}
