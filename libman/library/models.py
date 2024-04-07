@@ -24,6 +24,7 @@ class Request(models.Model):
     request_book = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
     request_date = models.DateField(auto_now=True)
     return_date = models.DateField(default=timezone.now())
+    is_approved = models.BooleanField(default=False)
     
     def __str__(self):
         return "{} - {} - {}".format(
