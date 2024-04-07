@@ -1,32 +1,24 @@
 {% extends "library/base.html" %}
 
 {% block content %}
-<style>
-  table,
-  th,
-  td {
-    border: 1px solid black;
-    text-align: center;
-  }
-</style>
-  <table style="width: 100%;">
-      <tr>
-        <th>Request id</th>
-        <th>User Name</th>
-        <th>Book title</th>
-        <th>Request date</th>
-        <th>Return date</th>
-        <th>Status</th>
-    </tr>
-    {% for request in requests %}
+<table style="width: 100%;">
     <tr>
-     <td>{{ request.request_id }}</td>
-     <td>{{ request.request_user  }}</td>
-     <td>{{ request.request_book }}</td>
-     <td>{{ request.request_date }}</td>
-     <td>{{ request.return_date }}</td>
-     <td>{% if requets.is_approved %}Approved{% else %}Unapproved {% endif %}</td>
-    </tr>
+      <th>Request id</th>
+      <th>User Name</th>
+      <th>Book title</th>
+      <th>Request date</th>
+      <th>Return date</th>
+      <th>Status</th>
+  </tr>
+  {% for request in requests %}
+  <tr>
+   <td>{{ request.request_id }}</td>
+   <td>{{ request.request_user  }}</td>
+   <td>{{ request.request_book }}</td>
+   <td>{{ request.request_date }}</td>
+   <td>{{ request.return_date }}</td>
+   <td>{% if requets.is_approved %}Approved{% else %}Unapproved {% endif %}</td>
+  </tr>
   {% endfor %}
 </table>
 {% endblock content %}
