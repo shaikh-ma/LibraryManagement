@@ -9,16 +9,22 @@
       <th>Request date</th>
       <th>Return date</th>
       <th>Status</th>
-  </tr>
+    </tr>
   {% for request in requests %}
-  <tr>
-   <td>{{ request.request_id }}</td>
-   <td>{{ request.request_user  }}</td>
-   <td>{{ request.request_book }}</td>
-   <td>{{ request.request_date }}</td>
-   <td>{{ request.return_date }}</td>
-   <td>{% if requets.is_approved %}Approved{% else %}Unapproved {% endif %}</td>
-  </tr>
+    <tr>
+     <td>{{ request.request_id }}</td>
+     <td>{{ request.request_user  }}</td>
+     <td>{{ request.request_book }}</td>
+     <td>{{ request.request_date }}</td>
+     <td>{{ request.return_date }}</td>
+     <td>
+      {% if requets.is_approved %}
+       Approved 
+      {% else %}
+       Unapproved 
+      {% endif %}
+      </td>
+    </tr>
   {% endfor %}
 </table>
 {% endblock content %}

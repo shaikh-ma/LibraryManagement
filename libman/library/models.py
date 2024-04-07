@@ -23,7 +23,7 @@ class Request(models.Model):
     request_user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     request_book = models.ForeignKey(Book, on_delete=models.CASCADE, blank=True, null=True)
     request_date = models.DateField(auto_now=True)
-    return_date = models.DateField(default=timezone.now())
+    return_date = models.DateField(default=timezone.now() + timezone.timedelta(days=10))
     is_approved = models.BooleanField(default=False)
     
     def __str__(self):

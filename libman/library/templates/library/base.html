@@ -1,98 +1,32 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" type="text/css" href="{% static '/library/main.css' %}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bookipedia - Library</title>
-  <style>
-  .title {
-    color: grey;
-    font-size: 18px;
-  }
-  
-  #request_btn
-  {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-  }
-  
-  a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black;
-  }
-  
-  button:hover, a:hover {
-    opacity: 0.7;
-  }
-  
-  table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-  text-align: center;
-  }
-  th{
-      background-color: gray;
-      color: white;
-      padding: 10px;
-  }
-  input[type=button], input[type=submit]{
-      padding : 10px;
-      border-radius: 15px;
-      background-color: cornflowerblue;
-      color: white;
-  }
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #fff;
-  }
-
-  li {
-    float: left;
-  }
-  
-  li a {
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-
-  li a:hover {
-    background-color: #111;
-    color: white;
-  }
-</style>
 </head>
 <body>
   <div style="display: inline-flex;background-color: black;">
-    <img style="width: 120px;" src="{% static 'library/logo.png' %}"/>
-    <div style="display: inline;"><ul>
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'profile' %}">My Profile</a></li>
-        {% if user.is_authenticated %}
+   <img style="width: 120px;" src="{% static 'library/logo.png' %}"/>
+   <div style="display: inline;">
+    <ul>
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li><a href="{% url 'profile' %}">My Profile</a></li>
+      {% if user.is_authenticated %}
         <li><a href="{% url 'user-books' username=user %}">My Books</a></li>
         <li><a href="{% url 'user-requests' username=user %}">My Requests</a></li>
         <li><a href="{% url 'logout' %}">Logout</a></li>
-        {% endif %}
+      {% endif %}
     </ul>
   </div>
   </div>
   <br/>
+  <br/>
   {% block content %}
+   <!-- BLOCK CONTENTS -->
   {% endblock %}
 </body>
 </html>

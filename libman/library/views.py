@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 from django.contrib import messages
 from .models import Book, Request
 from django.contrib.auth.models import User
@@ -34,12 +34,17 @@ class UserRequestsListView(ListView):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Request.objects.filter(request_user=user)
 
+
 @login_required
 def new_request(request):
+    user = request.user
+
     if request.method == "POST":
         form = RequestForm(request.POST)
         if form.is_valid():
-            form.save()
+            obj = form.save(commit=False)
+            obj.request_user = user
+            obj.save()
             messages.success(request, f'Your request has been created!')
             return redirect('home')
     form = RequestForm()
