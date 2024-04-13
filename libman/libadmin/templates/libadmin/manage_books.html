@@ -1,6 +1,18 @@
 {% extends "library/base.html" %}
 
 {% block content %}
-<h1>Welcome to the Books admin page!</h1>
-<p>This is a custom admin page that you can use to manage your Django app.</p>
+
+<br/> <br/>
+{% for book in books %}
+<div class="card">
+<div>
+    <h2>{{ book.title}}</h2>
+    <h2>{{ book.book_code }}</h2>
+    <h3>{{ book.is_available }}</h3>
+<p><a href="/super_admin/library/book/{{book.pk}}/change/">Change</a></p>
+<p><a href="/super_admin/library/book/{{book.pk}}/delete/">Delete</a></p>
+
+</div>
+</div>
+{% endfor %}
 {% endblock %}

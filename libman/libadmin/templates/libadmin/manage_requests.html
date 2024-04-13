@@ -1,6 +1,16 @@
 {% extends "library/base.html" %}
 
 {% block content %}
-<h1>Welcome to the Requests admin page!</h1>
-<p>This is a custom admin page that you can use to manage your Django app.</p>
+
+{% for request in requests %}
+<div class="card">
+    <div>
+        <h2>{{ request.request_user}}</h2>
+        <h2>{{ request.request_book }}</h2>
+        <p><a href="/super_admin/library/request/{{request.pk}}/change/">Change</a></p>
+        <p><a href="/super_admin/library/request/{{request.pk}}/delete/">Delete</a></p>
+
+    </div>
+</div>
+{% endfor %}
 {% endblock %}
