@@ -7,6 +7,8 @@
     <div>
         <h2>{{ request.request_user}}</h2>
         <h2>{{ request.request_book }}</h2>
+        <p><a href="">Approve</a></p>
+        <p><a href="">Reject</a></p>
         <p><a href="/super_admin/library/request/{{request.pk}}/change/">Change</a></p>
         <p><a href="/super_admin/library/request/{{request.pk}}/delete/">Delete</a></p>
 

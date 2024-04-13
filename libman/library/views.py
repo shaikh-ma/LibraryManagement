@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import RequestForm
 from django.contrib.auth.decorators import login_required
-
+from django.utils import timezone
 
 class BookListView(LoginRequiredMixin, ListView):
     model = Book
@@ -40,8 +40,14 @@ def new_request(request):
     if request.method == "POST":
         form = RequestForm(request.POST)
         if form.is_valid():
+            book_title = form.cleaned_data['request_book']
+            book_details = Book.objects.filter(title=book_title).values()[0]
             book_request = form.save(commit=False)
-            book_request.user = request.user
+            book_request.request_user = request.user
+            book_request.request_book_title = book_details['title']
+            book_request.request_book_code = book_details['book_code']
+            book_request.request_date = timezone.now()
+
             book_request.save()
             messages.success(request, f'Your request has been created!')
             return redirect('user-requests', username=request.user)
