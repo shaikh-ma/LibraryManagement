@@ -7,6 +7,7 @@ urlpatterns = [
     path('user/<str:username>', views.UserBooksListView.as_view(), name='user-books'),
     path('new_request/', views.new_request, name='new-user-request'),
     path('requests/<str:username>', views.UserRequestsListView.as_view(), name='user-requests'),
+    path('requests/<str:username>/<int:pk>', views.RequestDetailView.as_view(), name='request_detail'),
     path("book/<int:pk>/", views.BookDetailView.as_view(), name="book_detail"),
     path("admin", adviews.library_admin, name="admin_login"),
     path('admin/manage_books', adviews.manage_books, name='manage_books'),

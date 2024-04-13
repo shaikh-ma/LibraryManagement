@@ -6,18 +6,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="{% static 'library/logo.ico' %}">
-  <title>Bookipedia - Library</title>
   <link rel="stylesheet" href="{% static '/library/css/style.css' %}">
-  <!-- <link rel="stylesheet" type="text/css" href="{% static '/library/main.css' %}"> -->
+  <title>Bookipedia</title>
 </head>
 <body>
   <div id="bg" style="text-align: center;">
-    <!-- <img style="width: 120px;" alt="Bookipedia" src="{% static 'library/logo.png' %}"/> -->
     <h1>BOOKIPEDIA</h1>
    <div style="display: inline;">
     <nav id="bg">
     <ul>
-      <li><a href="{% url 'home' %}">Home</a></li>
+      <li>
+        <!-- <span><img style="width: 120px;" alt="Bookipedia" src="{% static 'library/logo.png' %}"/> -->
+        <a href="{% url 'home' %}">Home</a>
+      <!-- </span> -->
+      </li>
       {% if user.is_superuser %}
         <li><a href="{% url 'manage_books' %}">Manage Books</a></li>
         <li><a href="{% url 'manage_requests' %}">Manage Requests</a></li>

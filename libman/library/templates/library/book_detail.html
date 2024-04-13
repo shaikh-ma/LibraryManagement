@@ -3,12 +3,16 @@
 {% block content %}
 <br/>
 <br/>
-<table style="width: auto;">
-<tr><td style="padding: 5px">  Title           </td><td> {{ book.title }}</td></tr>
-<tr><td style="padding: 5px">  Author          </td><td> {{ book.author }}</td></tr>
-<tr><td style="padding: 5px">  Book code       </td><td> {{ book.book_code }}</td></tr>
-<tr><td style="padding: 5px">  Is available    </td><td> {{ book.is_available }}</td></tr>
+<div style="text-align: center;">
+    <table style="width:100%;">
+    <tr><td style="padding: 5px">  Title           </td><td> {{ book.title }}</td></tr>
+    <tr><td style="padding: 5px">  Author          </td><td> {{ book.author }}</td></tr>
+    <tr><td style="padding: 5px">  Book code       </td><td> {{ book.book_code }}</td></tr>
+    <tr><td style="padding: 5px">  Is available    </td><td> {{ book.is_available }}</td></tr>
 <tr><td style="padding: 5px">  Date book added </td><td> {{ book.date_book_added }}</td></tr>
 <tr><td style="padding: 5px">  Summary         </td><td> {{ book.summary }}</td></tr>
 </table>
+<br/>
+<button><a href="{% url 'user-books' user %}">Back</a></button>
+</div>
 {% endblock %}

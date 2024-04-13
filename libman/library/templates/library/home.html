@@ -3,23 +3,7 @@
 
 
 {% block content %}
-<script>
-  function filter_books(){
-    selection = document.getElementsByTagName("select");
-    console.log(selection)
-    avl_books = document.querySelectorAll(".card");
-    for (let i=0; i < avl_books.length; i++){
-      txt = avl_books[i].children[4].innerText;
-      if (selection[0].value == 'By availability' && txt == "Status: True"){
-        avl_books[i].style.display = 'none';
-      }
-      else {
-        avl_books[i].style.display = 'inline-flex';
-      }
-    }
-  }
-</script>
-  <h1>Hello {{ user }}, Welcome to Bookipedia!</h1>
+  <h2>Hello {{ user }}, welcome to Bookipedia!</h2>
   <br/>
 <div style="display: inline;">
   <a id="viewBtn" href="{% url 'new-user-request' %}">New Book Request</a>
@@ -32,7 +16,11 @@
     <div class="card">
         <h2>{{ book.title }}</h2>
         <p>{{ book.author }}</p>
+        {% if book.image.url %}
         <img src="{% static 'library/book.png' %}" alt="{{ book.title }}" style="width:100px">
+        {% else %}
+          <img src="{{ book.image.url }}" alt="{{ book.title }}" style="width:100px">
+        {% endif %}
         <p>Book Code: {{ book.book_code }}</p>
         {% if book.is_available %}
         <a id="viewBtn" href="{% url 'book_detail' book.pk %}">View Book</a>

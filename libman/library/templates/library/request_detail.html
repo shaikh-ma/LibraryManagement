@@ -1,27 +1,18 @@
 {% extends 'library/base.html' %}
 
 {% block content %}
+<div style="text-align: center;">
+<table style="width:100%;">
+    <tr><td style="pading: 5px">Request id</td><td>{{ request.request_id }}</td></tr>
+    <tr><td style="pading: 5px">Username</td><td>{{ request.request_user }}</td></tr>
+    <tr><td style="pading: 5px">Book Name</td><td>{{ request.request_book }}</td></tr>
+    <tr><td style="pading: 5px">Book Title</td><td>{{ request.request_book_title }}</td></tr>
+    <tr><td style="pading: 5px">Book code</td><td>{{ request.request_book_code }}</td></tr>
+    <tr><td style="pading: 5px">Request Date</td><td>{{ request.request_date }}</td></tr>
+    <tr><td style="pading: 5px">Return Date</td><td>{{ request.request_date }}</td></tr>
+    <tr><td style="pading: 5px">Request status</td><td>{% if request.is_approved %}Approved {% else %} Not approved {% endif %}</td></tr>
+</table>
 <br/>
-<br/>
-<form action="">
-<label for="">Request id</label>
-<input type="text" placeholder="{{ request.request_id }}"></input>
-<label for="">Request user</label>
-<input type="text" placeholder="{{ request.request_user }}"/>
-<label for="">Request book</label>
-<input type="text" placeholder="{{ request.request_book }}"/>
-<label for="">Request book title</label>
-<input type="text" placeholder="{{ request.request_book_title }}"/>
-<label for="">Request book code</label>
-<input type="text" placeholder="{{ request.request_book_code }}"/>
-<label for="">Request date</label>
-<input type="text" placeholder="{{ request.request_date }}"/>
-<label for="">Return date</label>
-<input type="text" placeholder="{{ request.request_date }}">
-<label for="">Is approved</label>
-<input type="text" placeholder="{{ request.is_approved }}"></input>
-<button type="submit">Add request</button>
-</form>
-
-
+<button><a href="{% url 'user-requests' user %}">Back</a></button>
+</div>
 {% endblock %}

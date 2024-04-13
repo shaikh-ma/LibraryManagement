@@ -18,14 +18,14 @@
     </tr>
   {% for request in requests %}
     <tr>
-     <td><a href="#">{{ request.request_id }}</a></td>
+     <td><a href="{% url 'request_detail' user request.pk %}">{{ request.request_id }}</a></td>
      <td>{{ request.request_user  }}</td>
      <td>{{ request.request_book_title }}</td>
      <td>{{ request.request_book_code }}</td>
      <td>{{ request.request_date }}</td>
      <td>{{ request.return_date }}</td>
      <td>
-      {% if requets.is_approved %}
+      {% if request.is_approved %}
        Approved 
       {% else %}
        Unapproved 
