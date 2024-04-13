@@ -1,0 +1,112 @@
+:root {
+  --background-color: lightgreen;
+  --foreground-color: darkgreen;
+  --font: 'Roboto', sans-serif;
+  --fontsize: 18px;
+  --hovercolor: green
+}
+
+.title {
+  color: var(--foreground-color);
+  font-size: var(--fontsize);
+}
+
+#request_btn
+{
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  /* background-color: var(--background-color); */
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: var(--fontsize);
+}
+
+a {
+  text-decoration: none;
+  font-size: var(--fontsize);
+  color: var(--foreground-color);
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+  background-color: var(--hovercolor);
+}
+
+table, th, td {
+border: 1px solid var(--foreground-color);
+border-collapse: collapse;
+text-align: center;
+font-family: var(--font);
+color: var(--foreground-color);
+}
+
+th{
+    background-color: var(--hovercolor);
+    color: white;
+    padding: 10px;
+}
+
+
+input[type=button], input[type=submit]{
+    padding : 10px;
+    border-radius: 15px;
+    background-color: var(--background-color);
+    color: white;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--background-color);
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: var(--foreground-color);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: var(--hovercolor);
+  color: white;
+}
+
+.card {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  display: inline-table;
+  padding: 20px;
+  margin-bottom: 35px;
+  text-align: center;
+  background-color: var(--background-color);
+}
+
+#viewBtn {
+  background-color: var(--background-color);
+  padding: 10px;
+  border-radius: 10px;
+  font-family: var(--font);
+}
+
+a,
+h1,
+p,
+li.a {
+  font-family: var(--font);
+  color: var(--foreground-color);
+}
+
+#bg {
+  background-color: var(--background-color);
+}

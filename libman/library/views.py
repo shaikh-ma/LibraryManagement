@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.contrib import messages
 from .models import Book, Request
 from django.contrib.auth.models import User
@@ -40,8 +40,32 @@ def new_request(request):
     if request.method == "POST":
         form = RequestForm(request.POST)
         if form.is_valid():
-            form.save()
+            book_request = form.save(commit=False)
+            book_request.user = request.user
+            book_request.save()
             messages.success(request, f'Your request has been created!')
             return redirect('user-requests', username=request.user)
-    form = RequestForm()
+    else:
+        form = RequestForm()
     return render(request, 'library/requests.html', {'form': form})
+
+
+
+class BookDetailView(DetailView):
+    model = Book
+    template_name = 'library/book_detail.html'
+    context_object_name = 'book'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+class RequestDetailView(DetailView):
+    model = Request
+    template_name = 'library/request_detail.html'
+    context_object_name = 'request'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context

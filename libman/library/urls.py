@@ -1,9 +1,15 @@
 from django.urls import path
-from .views import BookListView, UserBooksListView, new_request, UserRequestsListView
+from . import views
+from libadmin import views as adviews
 
 urlpatterns = [
-    path("", BookListView.as_view(), name="home"),
-    path('user/<str:username>', UserBooksListView.as_view(), name='user-books'),
-    path('requests/new_request/', new_request, name='new-user-requests'),
-    path('requests/<str:username>', UserRequestsListView.as_view(), name='user-requests'),
+    path("", views.BookListView.as_view(), name="home"),
+    path('user/<str:username>', views.UserBooksListView.as_view(), name='user-books'),
+    path('new_request/', views.new_request, name='new-user-request'),
+    path('requests/<str:username>', views.UserRequestsListView.as_view(), name='user-requests'),
+    path("book/<int:pk>/", views.BookDetailView.as_view(), name="book_detail"),
+    path("admin", adviews.library_admin, name="admin_login"),
+    path('admin/manage_books', adviews.manage_books, name='manage_books'),
+    path('admin/manage_requests', adviews.manage_requests, name='manage_requests'),
+    path('admin/manage_users', adviews.manage_users, name='manage_users'),
 ]

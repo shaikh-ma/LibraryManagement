@@ -1,6 +1,11 @@
 {% extends "library/base.html" %}
-
 {% block content %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">
+  {{ message }}
+</div>
+{% endfor %}
+<br/>
 <table style="width: 100%;">
     <tr>
       <th>Request id</th>
@@ -13,7 +18,7 @@
     </tr>
   {% for request in requests %}
     <tr>
-     <td>{{ request.request_id }}</td>
+     <td><a href="#">{{ request.request_id }}</a></td>
      <td>{{ request.request_user  }}</td>
      <td>{{ request.request_book_title }}</td>
      <td>{{ request.request_book_code }}</td>

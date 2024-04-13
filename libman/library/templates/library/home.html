@@ -1,22 +1,44 @@
 {% extends 'library/base.html' %}
 {% load static %}
+
+
 {% block content %}
-  
-  <a style="background-color: green;color:white; padding:5px" href="{% url 'new-user-requests' %}">New Book Request</a>
+<script>
+  function filter_books(){
+    selection = document.getElementsByTagName("select");
+    console.log(selection)
+    avl_books = document.querySelectorAll(".card");
+    for (let i=0; i < avl_books.length; i++){
+      txt = avl_books[i].children[4].innerText;
+      if (selection[0].value == 'By availability' && txt == "Status: True"){
+        avl_books[i].style.display = 'none';
+      }
+      else {
+        avl_books[i].style.display = 'inline-flex';
+      }
+    }
+  }
+</script>
+  <h1>Hello {{ user }}, Welcome to Bookipedia!</h1>
   <br/>
-  <br/>
+<div style="display: inline;">
+  <a id="viewBtn" href="{% url 'new-user-request' %}">New Book Request</a>
+</div> 
+
+<br/>
+<br/>
 
   {% for book in books %}
-    <div class="card" onclick="alert('To Do')">
-        <h2 class="title">{{ book.title }}</h2>
-        <h4>{{ book.author }}</h4>
+    <div class="card">
+        <h2>{{ book.title }}</h2>
+        <p>{{ book.author }}</p>
         <img src="{% static 'library/book.png' %}" alt="{{ book.title }}" style="width:100px">
         <p>Book Code: {{ book.book_code }}</p>
-        <!-- {% if book.is_available %}
-          <a style="background-color: green;color:white; padding:5px" href="{% url 'new-user-requests' %}">Request Book</a>
+        {% if book.is_available %}
+        <a id="viewBtn" href="{% url 'book_detail' book.pk %}">View Book</a>
         {% else %}
           <p style="background-color: red;color:white; padding:5px;">Not available</p>
-        {% endif %} -->
+        {% endif %}
     </div>
     &nbsp; &nbsp; &nbsp;
   {% endfor %}

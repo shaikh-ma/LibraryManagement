@@ -13,6 +13,8 @@ class Book(models.Model):
     date_book_added = models.DateField(default=timezone.now)
     book_code = models.CharField(max_length=300)
     summary = models.TextField(blank=True, null=True)
+    # book_img = models.ImageField(upload_to ='media/')
+
     
     def __str__(self):
         return self.title

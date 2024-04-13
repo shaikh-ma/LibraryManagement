@@ -2,29 +2,37 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" type="text/css" href="{% static '/library/main.css' %}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="{% static 'library/logo.ico' %}">
   <title>Bookipedia - Library</title>
+  <link rel="stylesheet" href="{% static '/library/css/style.css' %}">
+  <!-- <link rel="stylesheet" type="text/css" href="{% static '/library/main.css' %}"> -->
 </head>
 <body>
-  <div style="display: inline-flex;background-color: black;">
-   <img style="width: 120px;" src="{% static 'library/logo.png' %}"/>
+  <div id="bg" style="text-align: center;">
+    <!-- <img style="width: 120px;" alt="Bookipedia" src="{% static 'library/logo.png' %}"/> -->
+    <h1>BOOKIPEDIA</h1>
    <div style="display: inline;">
+    <nav id="bg">
     <ul>
       <li><a href="{% url 'home' %}">Home</a></li>
-      <li><a href="{% url 'profile' %}">My Profile</a></li>
-      {% if user.is_authenticated %}
+      {% if user.is_superuser %}
+        <li><a href="{% url 'manage_books' %}">Manage Books</a></li>
+        <li><a href="{% url 'manage_requests' %}">Manage Requests</a></li>
+        <li><a href="{% url 'manage_users' %}">Manage Users</a></li>
+      {% elif user.is_authenticated %}
+        <li><a href="{% url 'profile' %}">My Profile</a></li>
         <li><a href="{% url 'user-books' username=user %}">My Books</a></li>
         <li><a href="{% url 'user-requests' username=user %}">My Requests</a></li>
-        <li><a href="{% url 'logout' %}">Logout</a></li>
       {% endif %}
+      <li><a href="{% url 'logout' %}">Logout</a></li>
     </ul>
+    </nav>
   </div>
   </div>
-  <br/>
-  <br/>
+
   {% block content %}
    <!-- BLOCK CONTENTS -->
   {% endblock %}
