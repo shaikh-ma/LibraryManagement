@@ -4,7 +4,7 @@ from .models import Book, Request
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render, redirect
-from .forms import RequestForm
+from .forms import RequestForm, ReturnRequestForm
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
@@ -39,6 +39,10 @@ class UserRequestsListView(ListView):
 def new_request(request):
     if request.method == "POST":
         form = RequestForm(request.POST)
+        if request.user.is_superuser:
+            messages.success(request, f'Admin cannot request book!')
+            return redirect('user-requests', username=request.user)
+        
         if form.is_valid():
             book_title = form.cleaned_data['request_book']
             book_details = Book.objects.filter(title=book_title).values()[0]
@@ -75,3 +79,26 @@ class RequestDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+@login_required
+def request_book_return(request):
+    if request.method == "POST":
+        form = ReturnRequestForm(request.POST)
+        if request.user.is_superuser:
+            messages.success(request, f'Admin cannot return a book!')
+            return redirect('home')
+        
+        if form.is_valid():
+            book_title = form.cleaned_data['request_book']
+            # book_details = Book.objects.filter(title=book_title).values()[0]
+            book_request = form.save(commit=False)
+            # book_details.is_available = True
+            # book_details.save()
+            book_request.request_user = None
+            book_request.request_date = None
+            book_request.save()
+            messages.success(request, f'Your request has been created!')
+            return redirect('user-requests', username=request.user)
+    else:
+        form = ReturnRequestForm()
+    return render(request, 'library/return_requests.html', {'form': form})

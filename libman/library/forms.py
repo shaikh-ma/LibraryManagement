@@ -1,14 +1,41 @@
 from django import forms
-from .models import Request
+from .models import Request, Book
 
 
 class RequestForm(forms.ModelForm):
     class Meta:
         model = Request
         fields = (
-            # 'request_user', 
             'request_book',
-            # 'request_book_title',
-            # 'request_book_code',
+            'return_date')
+        excluede = ("request_user")
+
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = (
+           "title",
+           "author",
+           "book_code",
+           "summary",
+           "image",
+        )
+
+class BookEditForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = (
+           "title",
+           "author",
+           "book_code",
+           "summary",
+           "image",
+        )
+
+class ReturnRequestForm(forms.ModelForm):
+    class Meta:
+        model = Request
+        fields = (
+            'request_book',
             'return_date')
         excluede = ("request_user")

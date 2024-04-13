@@ -6,6 +6,9 @@
 <div class="card">
     <div>
         {{ user }}
+        {% if not user.is_superuser %}
+        <p><a href="{% url 'delete_user' user.pk %}">Delete</a></p>
+        {% endif %}
     </div>
 </div>
 {% endfor %}
