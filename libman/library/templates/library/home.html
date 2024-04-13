@@ -16,10 +16,10 @@
     <div class="card">
         <h2>{{ book.title }}</h2>
         <p>{{ book.author }}</p>
-        {% if book.image.url %}
-        <img src="{% static 'library/book.png' %}" alt="{{ book.title }}" style="width:100px">
+        {% if 'book_pics' in book.image.url %}
+            <img src="{{ book.image.url }}" alt="{{ book.title }}" id="book_img">
         {% else %}
-          <img src="{{ book.image.url }}" alt="{{ book.title }}" style="width:100px">
+        <img src="{% static 'library/book.png' %}" alt="{{ book.title }}" id="book_img">
         {% endif %}
         <p>Book Code: {{ book.book_code }}</p>
         {% if book.is_available %}

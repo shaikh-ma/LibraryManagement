@@ -84,6 +84,7 @@ li a:hover {
 }
 
 .card {
+  border: 1px solid var(--background-color);
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   display: inline-table;
   padding: 20px;
@@ -108,4 +109,10 @@ form.legend,
 li.a {
   font-family: var(--font);
   color: var(--foreground-color);
+}
+
+#book_img{
+  width: 100px;
+  height: 100px;
+  border: 1px solid var(--background-color);
 }
