@@ -16,12 +16,9 @@
     <nav id="bg">
     <ul>
       <li>
-        <!-- <span><img style="width: 120px;" alt="Bookipedia" src="{% static 'library/logo.png' %}"/> -->
         <a href="{% url 'home' %}">Home</a>
-      <!-- </span> -->
       </li>
       {% if user.is_superuser %}
-        <li><a href="{% url 'manage_books' %}">Manage Books</a></li>
         <li><a href="{% url 'manage_requests' %}">Manage Requests</a></li>
         <li><a href="{% url 'manage_users' %}">Manage Users</a></li>
       {% elif user.is_authenticated %}

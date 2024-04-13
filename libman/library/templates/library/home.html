@@ -22,10 +22,18 @@
         <img src="{% static 'library/book.png' %}" alt="{{ book.title }}" id="book_img">
         {% endif %}
         <p>Book Code: {{ book.book_code }}</p>
-        {% if book.is_available %}
-        <a id="viewBtn" href="{% url 'book_detail' book.pk %}">View Book</a>
-        {% else %}
-          <p style="background-color: red;color:white; padding:5px;">Not available</p>
+        <p><a id="viewBtn" href="{% url 'book_detail' book.pk %}">View Book</a></p>
+        {% if user.is_superuser %}
+        <p>
+        <a  style="background: lightgreen; color: green; padding:5px"  href="#">Edit Book</a>
+      </p>
+        <p>
+          <a 
+          style="background: pink; color: red; padding:5px"
+          href="{% url 'delete_book' book.pk %}">
+          Delete Book
+        </a>
+      </p>
         {% endif %}
     </div>
     &nbsp; &nbsp; &nbsp;
