@@ -24,6 +24,7 @@ class UserBooksListView(ListView):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Book.objects.filter(issued_to=user)
 
+
 class UserRequestsListView(ListView):
     model = Request
     template_name = 'library/user_requests.html'  # <app>/<model>_<viewtype>.html
@@ -45,9 +46,21 @@ def new_request(request):
         
         if form.is_valid():
             book_id = form.cleaned_data['request_book_code']
-            book_details = Book.objects.filter(book_code=book_id).values()[0]
+            try:
+                book_details = Book.objects.filter(book_code=book_id).values()[0]
+            except IndexError:
+                err = "Book code '{}' does not exists!".format(book_id)
+                messages.error(request, err)
+                return redirect('home')
+
             if not book_details['is_available']:
                 err = "Book not available"
+                messages.error(request, err)
+                return redirect('home')
+
+            existing = Request.objects.filter(request_book_code=book_details['book_code'])
+            if len(existing.values()):
+                err = "Request already exists!"
                 messages.error(request, err)
                 return redirect('home')
 
@@ -92,12 +105,12 @@ class RequestDetailView(DetailView):
 class UserReturnRequestsListView(ListView):
     model = ReturnRequest
     template_name = 'library/user_return_requests.html'  # <app>/<model>_<viewtype>.html
-    context_object_name = 'requests'
+    context_object_name = 'ret_requests'
     paginate_by = 5
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Request.objects.filter(request_user=user)
+        return ReturnRequest.objects.filter(request_user=user)
 
 
 
@@ -112,11 +125,16 @@ def request_book_return(request, bookid):
         if form.is_valid():
             book_request = form.save(commit=False)
             book_details = Book.objects.get(pk=bookid)
+            existing = ReturnRequest.objects.filter(request_book_code=book_details.book_code)
+            if len(existing.values()):
+                err = "Request already exists!"
+                messages.error(request, err)
+                return redirect('home')
 
-            book_request.request_book_code = book_details['book_code']
-            book_request.request_book_title = book_details['title'] 
+            book_request.request_book_code = book_details.book_code
+            book_request.request_book_title = book_details.title
             book_request.request_user = request.user
-            book_request.request_date = timezone.now()
+            book_request.is_raised = True
             book_request.save()
             messages.success(request, f'Your request has been created!')
             return redirect('user-return-requests', username=request.user)

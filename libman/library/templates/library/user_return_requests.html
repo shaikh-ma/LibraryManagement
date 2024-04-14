@@ -1,8 +1,8 @@
 {% extends "library/base.html" %}
 {% block content %}
 <br/>
-{% if not requests %}
-No requests yet!
+{% if not ret_requests %}
+No ret_requests yet!
 {% else %}
 <table style="width: 100%;">
     <tr>
@@ -13,7 +13,7 @@ No requests yet!
       <th>Request date</th>
       <th>Status</th>
     </tr>
-  {% for request in requests %}
+  {% for request in ret_requests %}
     <tr>
      <td><a href="{% url 'request_detail' user request.pk %}">{{ request.request_id }}</a></td>
      <td>{{ request.request_user  }}</td>
