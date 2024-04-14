@@ -11,7 +11,7 @@ class Book(models.Model):
     issued_date = models.DateField(blank=True, null=True)
     returned_date = models.DateField(blank=True, null=True)
     date_book_added = models.DateField(default=timezone.now)
-    book_code = models.CharField(max_length=300)
+    book_code = models.CharField(max_length=300, unique=True, null=False)
     summary = models.TextField(blank=True, null=True)
     image = models.ImageField(default='book.png', upload_to='book_pics')
 
@@ -39,13 +39,13 @@ class Request(models.Model):
         )
 
 class ReturnRequest(models.Model):
-    ret_request_id = models.IntegerField(primary_key=True, auto_created=True)
-    ret_request_user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    ret_request_book = models.ForeignKey(Book, on_delete=models.DO_NOTHING, blank=True, null=True)
-    ret_request_book_title = models.CharField(max_length=200)
-    ret_request_book_code = models.CharField(max_length=200)
-    ret_request_date = models.DateField(auto_now=True)
-    ret_is_approved = models.BooleanField(default=False)
+    request_id = models.IntegerField(primary_key=True, auto_created=True)
+    request_user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    request_book = models.ForeignKey(Book, on_delete=models.DO_NOTHING, blank=True, null=True)
+    request_book_title = models.CharField(max_length=200)
+    request_book_code = models.CharField(max_length=200)
+    request_date = models.DateField(auto_now=True)
+    is_approved = models.BooleanField(default=False)
     
     def __str__(self):
         return "{} - {} - {}".format(

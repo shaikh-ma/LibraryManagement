@@ -111,7 +111,7 @@ def request_book_return(request, bookid):
 
         if form.is_valid():
             book_request = form.save(commit=False)
-            book_details = Book.objects.filter(pk=bookid).values()[0]
+            book_details = Book.objects.get(pk=bookid)
 
             book_request.request_book_code = book_details['book_code']
             book_request.request_book_title = book_details['title'] 
