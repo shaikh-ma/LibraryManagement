@@ -18,7 +18,6 @@ class BookForm(forms.ModelForm):
            "author",
            "book_code",
            "summary",
-           "image",
         )
 
 class BookEditForm(forms.ModelForm):
@@ -27,10 +26,9 @@ class BookEditForm(forms.ModelForm):
         fields = (
            "title",
            "author",
-           "book_code",
            "summary",
-           "image",
         )
+        exclude = ('book_code',)
 
 class ReturnRequestForm(forms.ModelForm):
     class Meta:

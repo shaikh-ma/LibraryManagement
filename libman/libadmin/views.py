@@ -92,20 +92,17 @@ def edit_book(request, bookid):
         form = BookEditForm(request.POST)
         if form.is_valid():
             book_form = form.save(commit=False)
-            book_details = form.cleaned_data #['bookid']
+            book_details = form.cleaned_data
             book = Book.objects.get(pk=bookid)
             book.title = book_details['title']
             book.author = book_details['author']
-            book.book_code = book_details['book_code']
             book.summary = book_details['summary']
-            book.image = upload_image(book_details['image'], book_details['book_code'])
-            book.save()
-            book_form.save( )
-            
+            book.save(update_fields=["title", "author", "summary"])
+            book_form.save()
             messages.success(request, f'Book as been added')
             return redirect('home')
     else:
-        form = BookForm()
+        form = BookEditForm()
     return render(request, 'libadmin/edit_book.html', {'form': form})
 
 
