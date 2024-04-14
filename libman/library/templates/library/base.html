@@ -19,16 +19,17 @@
         <a href="{% url 'home' %}">Home</a>
       </li>
       {% if user.is_superuser %}
-        <li><a href="{% url 'manage_books' %}">Manage Books</a></li>
-        <li><a href="{% url 'manage_requests' %}">Manage Requests</a></li>
-        <li><a href="{% url 'manage_users' %}">Manage Users</a></li>
+        <li><a href="{% url 'manage_books' %}">Books</a></li>
+        <li><a href="{% url 'manage_requests' %}">Requests</a></li>
+        <li><a href="{% url 'manage_return_requests' %}">Return Requests</a></li>
+        <li><a href="{% url 'manage_users' %}">Users</a></li>
       {% elif user.is_authenticated %}
         <li><a href="{% url 'user-books' username=user %}">My Books</a></li>
         <li><a href="{% url 'user-requests' username=user %}">My Requests</a></li>
         <li><a href="{% url 'user-return-requests' username=user %}">Return Requests</a></li>
         <li><a href="{% url 'profile' %}">My Profile</a></li>
       {% endif %}
-      <li style="float: left"><a href="{% url 'logout' %}">Logout</a></li>
+      <li><a href="{% url 'logout' %}">Logout</a></li>
     </ul>
     </nav>
   </div>

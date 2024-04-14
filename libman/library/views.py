@@ -96,17 +96,6 @@ class UserReturnRequestsListView(ListView):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 @login_required
 def request_book_return(request, bookid):
     if request.method == "POST":
@@ -116,11 +105,13 @@ def request_book_return(request, bookid):
             return redirect('home')
         
         if form.is_valid():
-            book_title = form.cleaned_data['request_book']
             book_details = Book.objects.filter(pk=bookid).values()[0]
             book_request = form.save(commit=False)
-            # book_request.request_user = None
-            # book_request.request_date = None
+            book_request.request_user = request.user
+            book_request.request_date = timezone.now()
+            book_request.request_book_title = book_details['title'] 
+            book_request.request_book_code = book_details['book_code']
+            book_request.is_approved = False
             book_request.save()
             messages.success(request, f'Your request has been created!')
             return redirect('user-return-requests', username=request.user)

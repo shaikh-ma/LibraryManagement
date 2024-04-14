@@ -8,7 +8,7 @@ class RequestForm(forms.ModelForm):
         fields = (
             'request_book',
             'return_date')
-        excluede = ("request_user")
+        exclude = ("request_user",)
 
 class BookForm(forms.ModelForm):
     class Meta:
@@ -35,7 +35,5 @@ class BookEditForm(forms.ModelForm):
 class ReturnRequestForm(forms.ModelForm):
     class Meta:
         model = Request
-        fields = (
-            'request_book',
-            'return_date')
-        excluede = ("request_user")
+        fields = ()
+        exclude = ["request_user",]

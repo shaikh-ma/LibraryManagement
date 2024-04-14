@@ -14,6 +14,7 @@ urlpatterns = [
     path("admin", adviews.library_admin, name="admin_login"),
     path('admin/manage_books', adviews.manage_books, name='manage_books'),
     path('admin/manage_requests', adviews.manage_requests, name='manage_requests'),
+    path('admin/manage_return_requests', adviews.manage_return_requests, name='manage_return_requests'),
     path('admin/manage_users', adviews.manage_users, name='manage_users'),
     path('admin/book/<int:bookid>/delete', adviews.delete_book, name='delete_book'),
     path('admin/requests/<int:rqid>/approve', adviews.approve_request, name='approve_request'),

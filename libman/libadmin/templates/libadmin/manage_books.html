@@ -8,7 +8,7 @@
 </div>
 <br/>
 {% for book in books %}
-<div class="card">
+<!-- <div class="card" style="width: 100%">
 <div>
     <h2>{{ book.title}}</h2>
     <h2>{{ book.book_code }}</h2>
@@ -34,6 +34,38 @@
         </a>
     </p>
 </div>
+</div> -->
+
+
+<div class="card" style="width: 100%;">
+    <div style="display: inline;text-align: left;">
+        <span>{{ book.title}}</span>
+        |
+        <span>{{ book.book_code }}</span>
+        |
+        <span>{% if book.is_available %}
+            Available
+        {% else %}
+        Issued To: {{ book.issued_to}}
+        |
+            Return Date: {{ book.returned_date }}
+            &nbsp;
+            {% endif %}
+        </span>
+        <br/>
+        <br/>
+        <span>
+            <a style="background: lightgreen; color: green; padding:5px" href="{% url 'edit_book' book.pk %}">
+                Edit Book
+            </a>
+        </span>
+            &nbsp;
+        <span>
+            <a style="background: pink; color: red; padding:5px" href="{% url 'delete_book' book.pk %}">
+                Delete Book
+            </a>
+        </span>
+    </div>
 </div>
 {% endfor %}
 {% endblock %}

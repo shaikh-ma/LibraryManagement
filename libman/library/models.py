@@ -45,7 +45,6 @@ class ReturnRequest(models.Model):
     request_book_title = models.CharField(max_length=200)
     request_book_code = models.CharField(max_length=200)
     request_date = models.DateField(auto_now=True)
-    return_date = models.DateField(default=timezone.now() + timezone.timedelta(days=10))
     is_approved = models.BooleanField(default=False)
     
     def __str__(self):

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import user_passes_test
 from library.models import Book, Request, User, ReturnRequest
 from django.contrib import messages
@@ -24,6 +24,10 @@ def manage_requests(request):
     requests = Request.objects.all()
     return render(request, 'libadmin/manage_requests.html', {'requests': requests})
 
+@user_passes_test(is_admin)
+def manage_return_requests(request):
+    requests = ReturnRequest.objects.all()
+    return render(request, 'libadmin/manage_return_requests.html', {'requests': requests})
 
 @user_passes_test(is_admin)
 def manage_users(request):
@@ -34,9 +38,12 @@ def manage_users(request):
 @user_passes_test(is_admin)
 def delete_book(request, bookid):
     book = Book.objects.get(pk=bookid)
-    if book:
+    if book.issued_to:
+        msg = "Cannot delete a book issued to a user"
+        messages.error(request, msg)
+    else:
         book.delete()
-        msg = "Delete book - {}!".format(book.title)
+        msg = "'{}' Book has been deleted!".format(book.title)
         messages.success(request, msg)
     return redirect('home')
 
