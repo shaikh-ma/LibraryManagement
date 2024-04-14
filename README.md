@@ -5,11 +5,14 @@
 
 To launch project,
 1.Make sure Python 3.6 is installed.
-2. Start command prompt in LibraryManagement folder.
-2. Run below commands,
+2. Start command prompt in libman folder.
+3. Run below commands,
    
 ```
 pip install django
+```
+4. Run command
+```
 python manage.py runserver
 ```
 
