@@ -6,8 +6,9 @@ urlpatterns = [
     path("", views.BookListView.as_view(), name="home"),
     path('user/<str:username>', views.UserBooksListView.as_view(), name='user-books'),
     path('new_request/', views.new_request, name='new-user-request'),
-    path('return_request/', views.request_book_return, name='request-return'),
+    path('return_request/<int:bookid>', views.request_book_return, name='request-return'),
     path('requests/<str:username>', views.UserRequestsListView.as_view(), name='user-requests'),
+    path('requests/return/<str:username>', views.UserReturnRequestsListView.as_view(), name='user-return-requests'),
     path('requests/<str:username>/<int:pk>', views.RequestDetailView.as_view(), name='request_detail'),
     path("book/<int:pk>/", views.BookDetailView.as_view(), name="book_detail"),
     path("admin", adviews.library_admin, name="admin_login"),
@@ -21,5 +22,4 @@ urlpatterns = [
     path('admin/book/add', adviews.add_new_book, name='add_new_book'),
     path('admin/book/edit/<int:bookid>', adviews.edit_book, name='edit_book'),
     path('return/<int:pk>', adviews.ReturnRequest, name='approve_book_return'),
-    
 ]

@@ -24,14 +24,21 @@
         <li><a href="{% url 'manage_users' %}">Manage Users</a></li>
       {% elif user.is_authenticated %}
         <li><a href="{% url 'user-books' username=user %}">My Books</a></li>
-        <li><a href="{% url 'profile' %}">My Profile</a></li>
         <li><a href="{% url 'user-requests' username=user %}">My Requests</a></li>
+        <li><a href="{% url 'user-return-requests' username=user %}">Return Requests</a></li>
+        <li><a href="{% url 'profile' %}">My Profile</a></li>
       {% endif %}
-      <li><a href="{% url 'logout' %}">Logout</a></li>
+      <li style="float: left"><a href="{% url 'logout' %}">Logout</a></li>
     </ul>
     </nav>
   </div>
   </div>
+
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }}">
+    {{ message }}
+  </div>
+  {% endfor %}
 
   {% block content %}
    <!-- BLOCK CONTENTS -->

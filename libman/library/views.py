@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView
 from django.contrib import messages
-from .models import Book, Request
+from .models import Book, Request, ReturnRequest
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render, redirect
@@ -80,8 +80,35 @@ class RequestDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         return context
 
+
+
+
+
+class UserReturnRequestsListView(ListView):
+    model = ReturnRequest
+    template_name = 'library/user_return_requests.html'  # <app>/<model>_<viewtype>.html
+    context_object_name = 'requests'
+    paginate_by = 5
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Request.objects.filter(request_user=user)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @login_required
-def request_book_return(request):
+def request_book_return(request, bookid):
     if request.method == "POST":
         form = ReturnRequestForm(request.POST)
         if request.user.is_superuser:
@@ -90,15 +117,14 @@ def request_book_return(request):
         
         if form.is_valid():
             book_title = form.cleaned_data['request_book']
-            # book_details = Book.objects.filter(title=book_title).values()[0]
+            book_details = Book.objects.filter(pk=bookid).values()[0]
             book_request = form.save(commit=False)
-            # book_details.is_available = True
-            # book_details.save()
-            book_request.request_user = None
-            book_request.request_date = None
+            # book_request.request_user = None
+            # book_request.request_date = None
             book_request.save()
             messages.success(request, f'Your request has been created!')
-            return redirect('user-requests', username=request.user)
+            return redirect('user-return-requests', username=request.user)
     else:
         form = ReturnRequestForm()
     return render(request, 'library/return_requests.html', {'form': form})
+

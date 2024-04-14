@@ -1,13 +1,13 @@
 {% extends "library/base.html" %}
 {% block content %}
   <br/>
-  <a id="viewBtn" href="{% url 'request-return' %}">Return Book Request</a>
   <br/>
   <br/>
   {% for book in books %}
         <div class="card">
           <h2><a class="article-title" href="{% url 'book_detail' book.pk %}">{{ book.title }}</a></h2>
-          <p class="article-content">{{ book.author }}</p>
+          <p class="article-content">{{ book.author }}</p> 
+          <a id="viewBtn" href="{% url 'request-return' book.pk %}">Return Book</a>
         </div>
   {% endfor %}
 {% endblock content %}
