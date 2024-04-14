@@ -108,7 +108,7 @@ def approve_book_return(request, rqid):
     user_req = ReturnRequest.objects.get(pk=rqid)
     if not user_req.is_approved:
         user_req.is_approved = True
-        book = Book.objects.get(pk=user_req.request_book_id)
+        book = Book.objects.get(code=user_req.request_book_code)
         book.issued_to = None
         book.returned_date = None
         book.issued_date = None
