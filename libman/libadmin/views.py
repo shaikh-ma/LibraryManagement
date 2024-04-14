@@ -4,7 +4,10 @@ from library.models import Book, Request, User, ReturnRequest
 from django.contrib import messages
 from django.utils import timezone
 from library.forms import BookForm, BookEditForm
-True
+
+from django.core.files import File
+from django.core.files.storage import FileSystemStorage
+from django.core.management import call_command
 
 def is_admin(user):
     return user.is_superuser
@@ -47,6 +50,7 @@ def delete_book(request, bookid):
         messages.success(request, msg)
     return redirect('home')
 
+
 @user_passes_test(is_admin)
 def delete_request(request, rqid):
     user_req = Request.objects.get(pk=rqid)
@@ -54,6 +58,7 @@ def delete_request(request, rqid):
     msg = "Request has been deleted!"
     messages.success(request, msg)
     return redirect('home')
+
 
 @user_passes_test(is_admin)
 def delete_user(request, rqid):
@@ -80,6 +85,7 @@ def add_new_book(request):
         form = BookForm()
     return render(request, 'libadmin/add_new_book.html', {'form': form})
 
+
 @user_passes_test(is_admin)
 def edit_book(request, bookid):
     if request.method == "POST":
@@ -92,7 +98,7 @@ def edit_book(request, bookid):
             book.author = book_details['author']
             book.book_code = book_details['book_code']
             book.summary = book_details['summary']
-            book.image = book_details['image']
+            book.image = upload_image(book_details['image'], book_details['book_code'])
             book.save()
             book_form.save( )
             
@@ -160,3 +166,14 @@ def approve_request(request, rqid):
 
     return redirect('manage_requests')
 
+
+def upload_image(image_path, book_code):
+    with open(image_path, 'rb') as f:
+        call_command(
+            'shell',
+            '--command', 
+            f'''
+            from library.models import Book; 
+            Book.objects.filter(book_code={book_code}).update(image_field=File(f))'
+            '''
+        )
