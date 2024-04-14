@@ -48,23 +48,6 @@ def delete_book(request, bookid):
     return redirect('home')
 
 @user_passes_test(is_admin)
-def approve_request(request, rqid):
-    user_req = Request.objects.get(pk=rqid)
-    if not user_req.is_approved:
-        user_req.is_approved = True
-        book = Book.objects.get(pk=user_req.request_book_id)
-        book.issued_to = user_req.request_user
-        book.returned_date = user_req.return_date
-        book.issued_date = timezone.now()
-        book.is_available = False
-        book.save()
-        user_req.save()
-        msg = "Request Approved! Book issued to {}".format(user_req.request_user)
-        messages.success(request, msg)
-        user_req.delete()
-    return redirect('home')
-
-@user_passes_test(is_admin)
 def delete_request(request, rqid):
     user_req = Request.objects.get(pk=rqid)
     user_req.delete()
@@ -136,3 +119,44 @@ def approve_book_return(request, rqid):
         messages.success(request, msg)
         user_req.delete()
     return redirect('home')
+
+
+@user_passes_test(is_admin)
+def confirm_return(request, rqid):
+    user_req = ReturnRequest.objects.get(pk=rqid)
+    if not user_req.is_approved:
+        book = Book.objects.get(book_code=user_req.request_book_code)
+        if book:
+          user_req.is_approved = True
+          book.issued_to = None
+          book.returned_date = None
+          book.issued_date = None
+          book.is_available = True
+          book.save()
+          user_req.save()
+          msg = "Book return is confirmed"
+          messages.success(request, msg)
+          user_req.delete()
+        else:
+            err = "Book not found!"
+            messages.error(request, err)
+    return redirect('home')
+
+@user_passes_test(is_admin)
+def approve_request(request, rqid):
+    user_req = Request.objects.get(pk=rqid)
+    if not user_req.is_approved:
+        user_req.is_approved = True
+        book = Book.objects.get(book_code=user_req.request_book_code)
+        book.issued_to = user_req.request_user
+        book.returned_date = user_req.return_date
+        book.issued_date = timezone.now()
+        book.is_available = False
+        book.save()
+        user_req.save()
+        msg = "Request Approved! Book issued to {}".format(user_req.request_user)
+        messages.success(request, msg)
+        user_req.delete()
+
+    return redirect('manage_requests')
+

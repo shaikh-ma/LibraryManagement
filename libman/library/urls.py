@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/book/add', adviews.add_new_book, name='add_new_book'),
     path('admin/book/edit/<int:bookid>', adviews.edit_book, name='edit_book'),
     path('return/<int:pk>', adviews.ReturnRequest, name='approve_book_return'),
+    path('admin/return/requests/<int:rqid>/confirm', adviews.confirm_return, name='confirm_return'),
 ]

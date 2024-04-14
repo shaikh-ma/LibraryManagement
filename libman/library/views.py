@@ -44,8 +44,13 @@ def new_request(request):
             return redirect('user-requests', username=request.user)
         
         if form.is_valid():
-            book_title = form.cleaned_data['request_book']
-            book_details = Book.objects.filter(title=book_title).values()[0]
+            book_id = form.cleaned_data['request_book_id']
+            book_details = Book.objects.filter(pk=book_id).values()[0]
+            if not book_details['is_available']:
+                err = "Book not available"
+                messages.error(request, err)
+                return redirect('home')
+
             book_request = form.save(commit=False)
             book_request.request_user = request.user
             book_request.request_book_title = book_details['title']
@@ -103,15 +108,22 @@ def request_book_return(request, bookid):
         if request.user.is_superuser:
             messages.success(request, f'Admin cannot return a book!')
             return redirect('home')
-        
+
         if form.is_valid():
-            book_details = Book.objects.filter(pk=bookid).values()[0]
             book_request = form.save(commit=False)
+            book_details = Book.objects.filter(pk=bookid).values()[0]
+
+            # existing_request = ReturnRequest.objects.filter(request_book_code=book_details['book_code'])
+            # if len(existing_request.values()) > 0:
+            #     err = "Request already exits"
+            #     messages.error(request, err)
+            #     return redirect('home')
+
+            book_request.request_book_code = book_details['book_code']
+            book_request.request_book_title = book_details['title'] 
             book_request.request_user = request.user
             book_request.request_date = timezone.now()
-            book_request.request_book_title = book_details['title'] 
-            book_request.request_book_code = book_details['book_code']
-            book_request.is_approved = False
+            # book_request.is_approved = False
             book_request.save()
             messages.success(request, f'Your request has been created!')
             return redirect('user-return-requests', username=request.user)

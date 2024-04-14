@@ -8,7 +8,8 @@ No new request!
 <div class="card">
     <div>
         <h2>{{ request.request_user}}</h2>
-        <h2>{{ request.request_book }}</h2>
+        <h2>{{ request.request_book_title }}</h2>
+        <p>Book Code: {{ request.request_book_code }}</p>
         <p><a href="{% url 'approve_request' request.pk %}">Approve</a></p>
         <p><a href="{% url 'delete_request' request.pk %}">Delete</a></p>
     </div>

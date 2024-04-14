@@ -1,5 +1,5 @@
 from django import forms
-from .models import Request, Book
+from .models import Request, Book, ReturnRequest
 
 
 class RequestForm(forms.ModelForm):
@@ -34,6 +34,6 @@ class BookEditForm(forms.ModelForm):
 
 class ReturnRequestForm(forms.ModelForm):
     class Meta:
-        model = Request
+        model = ReturnRequest
         fields = ()
         exclude = ["request_user",]
