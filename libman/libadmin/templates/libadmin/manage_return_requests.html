@@ -13,7 +13,6 @@ No new request!
         <h2>{{ request.request_book_title }}</h2>
         <p>Book Code: {{ request.request_book_code }}</p>
         <p><a href="{% url 'confirm_return' request.pk %}">Confirm Return</a></p>
-        <!-- <p><a href="{% url 'delete_request' request.pk %}">Delete</a></p> -->
     </div>
 </div>
 {% endfor %}

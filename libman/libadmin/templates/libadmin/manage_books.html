@@ -8,35 +8,6 @@
 </div>
 <br/>
 {% for book in books %}
-<!-- <div class="card" style="width: 100%">
-<div>
-    <h2>{{ book.title}}</h2>
-    <h2>{{ book.book_code }}</h2>
-    <h3>
-        {% if book.is_available %}
-        Available
-        {% else  %}
-        Issued To: <br/>{{ book.issued_to}} 
-        <br/>
-        <br/>
-        Return Date: <br/>{{ book.returned_date }}
-        <br/>
-        {% endif  %}
-    </h3>
-    <p>
-    <a style="background: lightgreen; color: green; padding:5px" href="{% url 'edit_book' book.pk %}">
-        Edit Book
-    </a>
-    </p>
-    <p>
-        <a style="background: pink; color: red; padding:5px" href="{% url 'delete_book' book.pk %}">
-            Delete Book
-        </a>
-    </p>
-</div>
-</div> -->
-
-
 <div class="card" style="width: 100%;">
     <div style="display: inline;text-align: left;">
         <span>{{ book.title}}</span>
