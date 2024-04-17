@@ -8,6 +8,7 @@
 <div style="display: inline;">
   <a id="viewBtn" href="{% url 'new-user-request' %}">New Book Request</a>
 </div> 
+<input type="text" id="searchbook" onkeyup="findBook()" placeholder="Search for book.." title="Type in book name">
 
 <br/>
 <br/>
@@ -22,8 +23,37 @@
             <img src="{{ book.image.url }}" alt="{{ book.title }}" id="book_img">
         {% endif %}
         <p>Book Code: {{ book.book_code }}</p>
+        {% if book.is_available %}
         <p><a id="viewBtn" href="{% url 'book_detail' book.pk %}">View Book</a></p>
+        {% else %}
+        <p id="viewBtn" style="color:red;background-color: lightcoral;">Not available</p>
+        {% endif %}
+
     </div>
     &nbsp; &nbsp; &nbsp;
   {% endfor %}
+
+<script>
+function findBook() {
+var input, filter, table, tr, td, i, txtValue;
+input = document.getElementById("searchbook");
+filter = input.value.toUpperCase();
+
+books = document.querySelectorAll("div.card");
+
+for (let i=0; i<books.length;i++){
+  booktitle = books[i].children[0].innerText.trim();
+  bookcode = books[i].children[3].innerText.trim();
+  matchtitle = booktitle.toUpperCase().indexOf(filter) > -1;
+  matchcode = bookcode.toUpperCase().indexOf(filter) > -1;
+  // console.log(booktitle, '-->', match)
+  if (matchtitle || matchcode){
+      books[i].style.display = "block"
+  }
+  else{
+      books[i].style.display = "none"
+  }
+}
+}
+</script>
 {% endblock %}

@@ -1,0 +1,21 @@
+{% extends "library/base.html" %}
+
+{% block content %}
+
+<h2>Student : {{ user }}</h2>
+<br/>
+<br/>
+{% for book in userbooks %}
+<div>
+    <table style="width: 100%">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Date Issued</th>
+            <th>Expected Return date</th>
+        </tr>
+    </table>
+</div>
+{% endfor %}
+
+{% endblock %}

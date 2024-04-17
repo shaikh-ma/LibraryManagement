@@ -24,4 +24,5 @@ urlpatterns = [
     path('admin/book/edit/<int:bookid>', adviews.edit_book, name='edit_book'),
     path('return/<int:pk>', adviews.ReturnRequest, name='approve_book_return'),
     path('admin/return/requests/<int:rqid>/confirm', adviews.confirm_return, name='confirm_return'),
+    path('user_books_admin/<str:user>/', adviews.user_books_admin_view, name='user-books-admin-view'),
 ]

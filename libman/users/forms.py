@@ -12,6 +12,7 @@ CHOICE_YEAR =(
 class UserRegisterForm(UserCreationForm):
     roll_no = forms.IntegerField()
     icard_no = forms.IntegerField()
+    # mobile_number = forms.IntegerField()
     class_div = forms.ChoiceField(choices=CHOICE_YEAR)
     email = forms.EmailField()
 
@@ -23,6 +24,7 @@ class UserRegisterForm(UserCreationForm):
             'icard_no',
             'class_div',
             'email', 
+            # 'mobile_number',
             'password1', 
             'password2'
             ]

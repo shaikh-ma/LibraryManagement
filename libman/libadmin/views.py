@@ -97,8 +97,8 @@ def edit_book(request, bookid):
             book.title = book_details['title']
             book.author = book_details['author']
             book.summary = book_details['summary']
-            book.save(update_fields=["title", "author", "summary"])
             book_form.save()
+            book.save(update_fields=["title", "author", "summary"])
             messages.success(request, f'Book as been added')
             return redirect('home')
     else:
@@ -174,3 +174,8 @@ def upload_image(image_path, book_code):
             Book.objects.filter(book_code={book_code}).update(image_field=File(f))'
             '''
         )
+
+
+@user_passes_test(is_admin)
+def user_books_admin_view(request, user):
+    return render(request, 'libadmin/user_books_admin_view.html', {'userbooks':  Book.objects.filter(issued_to=user)})

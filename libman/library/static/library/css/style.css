@@ -116,3 +116,8 @@ li.a {
   height: 100px;
   border: 1px solid var(--background-color);
 }
+
+#active{
+  background-color: var(--hovercolor);
+  color: white;
+}

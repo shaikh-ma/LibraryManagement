@@ -8,6 +8,7 @@ class Profile(models.Model):
     roll_no = models.CharField(max_length=200)
     icard_no = models.CharField(max_length=200)
     class_div = models.CharField(max_length=200)
+    # mobile_number = models.IntegerField()
 
     def __str__(self):
         return f'{self.user.username} Profile'
