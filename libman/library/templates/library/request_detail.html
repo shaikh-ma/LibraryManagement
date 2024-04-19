@@ -3,16 +3,16 @@
 {% block content %}
 <div style="text-align: center;">
 <table class="table"  style="width:100%;">
-    <tr><td style="pading: 5px">Request id</td><td>{{ request.request_id }}</td></tr>
-    <tr><td style="pading: 5px">Username</td><td>{{ request.request_user }}</td></tr>
-    <tr><td style="pading: 5px">Book Name</td><td>{{ request.request_book }}</td></tr>
-    <tr><td style="pading: 5px">Book Title</td><td>{{ request.request_book_title }}</td></tr>
-    <tr><td style="pading: 5px">Book code</td><td>{{ request.request_book_code }}</td></tr>
-    <tr><td style="pading: 5px">Request Date</td><td>{{ request.request_date }}</td></tr>
-    <tr><td style="pading: 5px">Return Date</td><td>{{ request.request_date }}</td></tr>
-    <tr><td style="pading: 5px">Request status</td><td>{% if request.is_approved %}Approved {% else %} Not approved {% endif %}</td></tr>
+    <tr><td>Request id</td><td>{{ request.request_id }}</td></tr>
+    <tr><td>Username</td><td>{{ request.request_user }}</td></tr>
+    <tr><td>Book Name</td><td>{{ request.request_book }}</td></tr>
+    <tr><td>Book Title</td><td>{{ request.request_book_title }}</td></tr>
+    <tr><td>Book code</td><td>{{ request.request_book_code }}</td></tr>
+    <tr><td>Request Date</td><td>{{ request.request_date }}</td></tr>
+    <tr><td>Return Date</td><td>{{ request.request_date }}</td></tr>
+    <tr><td>Request status</td><td>{% if request.is_approved %}Approved {% else %} Not approved {% endif %}</td></tr>
 </table>
 <br/>
-<button><a href="{% url 'user-requests' user %}">Back</a></button>
+<button class="btn btn-primary"><a style="color:white" href="{% url 'user-requests' user %}">Back</a></button>
 </div>
 {% endblock %}

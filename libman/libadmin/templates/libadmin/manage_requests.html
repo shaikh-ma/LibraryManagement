@@ -3,7 +3,7 @@
 {% block content %}
 <br/>
 {% if not requests %}
-No new request!
+<div class="alert-primary">No new request! </div>
 {% else %}
 {% for request in requests %}
 <div class="card">

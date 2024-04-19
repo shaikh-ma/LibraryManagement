@@ -7,31 +7,36 @@
   <h2>Hello {{ user }}, welcome to Bookipedia!</h2>
   <br/>
 <div style="display: inline;">
-  <button class="btn btn-primary"><a href="{% url 'new-user-request' %}" style="color: white">New Book Request</a></button>
+  <a class="btn btn-primary" href="{% url 'new-user-request' %}" style="color: white">New Book Request</a>
 </div> 
-<input type="text" id="searchbook" onkeyup="findBook()" placeholder="Search for book.." title="Type in book name">
+<input type="text" id="searchbook" onkeyup="findBook()" placeholder="Search for book.." title="Type in book name"/>
+
 
 <br/>
 <br/>
 
-  {% for book in books %}
-    <div class="card">
-        <h2>{{ book.title }}</h2>
-        <p>{{ book.author }}</p>
-        {% if 'book.png' in book.image.url %}
-           <img class="img-fluid" src="{% static 'library/book.png' %}" alt="{{ book.title }}" id="book_img">
-        {% else %}
-            <img class="img-fluid" src="{{ book.image.url }}" alt="{{ book.title }}" id="book_img">
-        {% endif %}
-        <p>Book Code: {{ book.book_code }}</p>
-        {% if book.is_available %}
-        <button class="btn btn-primary"><a style="color:white" href="{% url 'book_detail' book.pk %}">View Book</a></button>
-        {% else %}
-        <p  style="color:red;background-color: lightcoral;">Not available</p>
-        {% endif %}
-
-    </div>
-    &nbsp; &nbsp; &nbsp;
+{% for book in books %}
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ book.title }}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{ book.author }}</h6>
+    {% if 'book.png' in book.image.url %}
+       <img class="card-img-top" src="{% static 'library/book.png' %}" alt="{{ book.title }}" id="book_img" style="width:150px;height:150px"/>
+    {% else %}
+        <img class="card-img-top" src="{{ book.image.url }}" alt="{{ book.title }}" id="book_img" style="width:150px;height:150px"/>
+    {% endif %}
+    <p>Book Code: {{ book.book_code }}</p>
+    {% if book.summary %}
+    <p class="card-text">{{ book.summary }}</p>
+    {% endif %}
+    {% if book.is_available %}
+    <a href="{% url 'book_detail' book.pk %}" class="btn btn-primary">View Book</a>
+    {% else %}
+    <a href="" class="btn btn-secondary disabled">Book Not avaiable</a>
+    {% endif %}
+  </div>
+</div>
+  &nbsp; &nbsp; &nbsp;
   {% endfor %}
 
 <script>
@@ -40,19 +45,17 @@ var input, filter, table, tr, td, i, txtValue;
 input = document.getElementById("searchbook");
 filter = input.value.toUpperCase();
 
-books = document.querySelectorAll("div.card");
+books = document.querySelectorAll(".card-title");
+bookholders = document.querySelectorAll('.card');
 
 for (let i=0; i<books.length;i++){
-  booktitle = books[i].children[0].innerText.trim();
-  bookcode = books[i].children[3].innerText.trim();
+  booktitle = books[i].innerText.trim()
   matchtitle = booktitle.toUpperCase().indexOf(filter) > -1;
-  matchcode = bookcode.toUpperCase().indexOf(filter) > -1;
-  // console.log(booktitle, '-->', match)
-  if (matchtitle || matchcode){
-      books[i].style.display = "block"
+  if (matchtitle ){
+      bookholders[i].style.display = "block"
   }
   else{
-      books[i].style.display = "none"
+      bookholders[i].style.display = "none"
   }
 }
 }

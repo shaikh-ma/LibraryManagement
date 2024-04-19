@@ -2,9 +2,9 @@
 {% block content %}
 <br/>
 {% if not ret_requests %}
-No new return requests yet!
+<div class="alert-primary">No new request!</div>
 {% else %}
-<table class="table"  style="width: 100%;">
+<table class="table" style="width: 100%;">
     <tr>
       <th>Request id</th>
       <th>User Name</th>
@@ -31,7 +31,6 @@ No new return requests yet!
   {% endfor %}
 </table>
 <br />
-<button><a href="{% url 'home' %}">Back</a></button>
-</div>
+<button class="btn btn-primary"><a style="color:white" href="{% url 'home' %}">Back</a></button>
 {% endif %}
 {% endblock content %}

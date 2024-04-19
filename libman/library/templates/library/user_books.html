@@ -4,10 +4,15 @@
   <br/>
   <br/>
   {% for book in books %}
-        <div class="card">
-          <h2><a class="article-title" href="{% url 'book_detail' book.pk %}">{{ book.title }}</a></h2>
-          <p class="article-content">{{ book.author }}</p> 
-          <a id="viewBtn" href="{% url 'request-return' book.pk %}">Return Book</a>
-        </div>
+  <div class="card">
+  <div class="card-body">
+    <h2 class="card-title">{{ book.title }}</h2>
+    <p class="card-text">Author: {{ book.author }}</p> 
+    <p class="card-text">Book Code: {{ book.book_code }}</p> 
+    <button class="btn-primary">
+      <a style="color:white" class="article-title" href="{% url 'book_detail' book.pk %}">View Book</a></button>
+    <button class="btn-primary"><a style="color:white" href="{% url 'request-return' book.pk %}">Return Book</a></button>
+  </div>
+  </div>
   {% endfor %}
 {% endblock content %}
