@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}">
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="{% static 'library/nav_tabs.js' %}"></script>
+  <script src="{% static 'library/js/nav_tabs.js' %}"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
   <title>
@@ -19,12 +19,10 @@
    </title>
 </head>
 <body>
-
-  <h1>&nbsp;&nbsp;BOOKIPEDIA</h1>
-  <br>
-  <nav id="nav" class="nav">
+  <br/>
+  <nav id="nav" class="nav nav-tabs nav-stacked">
   {% if user.is_authenticated %}
-  <a class="nav-item nav-link active" href="{% url 'home' %}">Home</a>
+  <a onclick="test()" class="nav-item nav-link" href="{% url 'home' %}">Home</a>
   {% if user.is_superuser %}
   <a class="nav-item nav-link" href="{% url 'manage_books' %}">Books</a>
   <a class="nav-item nav-link" href="{% url 'manage_requests' %}">Requests</a>
@@ -47,8 +45,14 @@
   </div>
 {% endfor %}
 
+
+
 {% block content %}
  <!-- BLOCK CONTENTS -->
 {% endblock %}
+
+<script type="text/javascript">
+  test();
+</script>
 </body>
 </html>

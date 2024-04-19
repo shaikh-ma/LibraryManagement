@@ -1,7 +1,10 @@
 {% extends "library/base.html" %}
+{% load static %}
 
 {% block content %}
 <br/>
+<script src="{% static 'library/js/search_books.js' %}"></script>
+
 <input type="text" id="searchbook" onkeyup="findBook()" placeholder="Search for book.." title="Type in book name">
 
 <br/> <br/>
@@ -29,23 +32,6 @@
 {% endfor %}
 
 <script>
-function findBook() {
-search_for = $('#searchbook').val().toLowerCase();
-titles = $('.card-title');
-bookcards = $('.card');
-
-  for (let i=0; i<titles.length; i++){
-    title = titles[i].innerText.toLowerCase();
-    match = title.indexOf(search_for);
-    if (match > -1){
-      bookcards[i].style.display = "block"
-    }
-    else{
-          bookcards[i].style.display = "none"
-    }
-  }
-}
-
 const link = document.querySelector("#delete_book");
 link.addEventListener("click", (event) => {
     response = confirm("Are you sure you want to delete this book?");
