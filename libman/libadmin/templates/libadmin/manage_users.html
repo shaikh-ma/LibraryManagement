@@ -4,13 +4,27 @@
 
 {% for user in users %}
 <div class="card">
-    <div>
-        <p>{{ user }}</p>
+    <div class="card-body">
+        <p class="card-title">{{ user }}</p>
         {% if not user.is_superuser %}
-        <p><a href="{% url 'delete_user' user.pk %}">Delete</a></p>
+        <a id="delete_user" class="btn-primary btn" href="{% url 'delete_user' user.pk %}">Delete</a>
         {% endif %}
     </div>
 </div>
 {% endfor %}
 
+<script>
+const link = document.querySelector("#delete_user");
+link.addEventListener("click", (event) => {
+    response = confirm("Are you sure you want to delete this user?");
+    if (response) {
+        alert("Deleting User");
+    }
+    else {
+        alert("Aborting!");
+        event.preventDefault();
+        event.stopPropagation();
+    }
+});
+</script>
 {% endblock %}

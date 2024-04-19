@@ -6,54 +6,56 @@
 
 <br/> <br/>
 <div>
-<a id='viewBtn' href="{% url 'add_new_book' %}">Add book</a>
+<a class='btn-primary btn' href="{% url 'add_new_book' %}">Add book</a>
 </div>
 <br/>
 {% for book in books %}
-<div class="card" style="width: 100%;">
-    <div style="display: inline;text-align: left;">
-            <p>Title : {{ book.title }}</p>
-            <p>Author : {{ book.author }}</p>
-            <p>Book Code : {{ book.book_code }}</p>
-            <p>Available : {% if book.is_available %}Yes{% else %}Non{% endif %}</p>
+<div class="card">
+    <div class="card-body">
+            <h5 class="card-title">Title : {{ book.title }}</h5>
+            <p class="card-text">Author : {{ book.author }}</p>
+            <p class="card-text">Book Code : {{ book.book_code }}</p>
+            <p class="card-text">Available : {% if book.is_available %}Yes{% else %}Non{% endif %}</p>
             {% if issued_to %}
-            <p>Issued To : {{ book.issued_to }}</p>
-            <p>Issued Date : {{ book.issued_date }}</p>
-            <p>Return Date : {{ book.returned_date }}</p>
+            <p class="card-text">Issued To : {{ book.issued_to }}</p>
+            <p class="card-text">Issued Date : {{ book.issued_date }}</p>
+            <p class="card-text">Return Date : {{ book.returned_date }}</p>
             {% endif %} 
         <br/>
-        <span>
-            <a style="background: lightgreen; color: green; padding:5px" href="{% url 'edit_book' book.pk %}">
-                Edit Book
-            </a>
-        </span>
-            &nbsp;
-        <span>
-            <a style="background: pink; color: red; padding:5px" href="{% url 'delete_book' book.pk %}">
-                Delete Book
-            </a>
-        </span>
+        <a class="btn-primary btn" href="{% url 'edit_book' book.pk %}">Edit Book</a>
+        <a id="delete_book"  class="btn-primary btn" href="{% url 'delete_book' book.pk %}">Delete Book</a>
     </div>
 </div>
 {% endfor %}
 <script>
 function findBook() {
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("searchbook");
-    filter = input.value.toUpperCase();
-    books = document.querySelectorAll("div.card");
-    for (let i = 0; i < books.length; i++) {
-        booktitle = books[i].children[0].children[0].innerText.trim();
-        bookcode = books[i].children[0].children[2].innerText.trim();
-        matchtitle = booktitle.toUpperCase().indexOf(filter) > -1;
-        matchcode = bookcode.toUpperCase().indexOf(filter) > -1;
-        if (matchtitle || matchcode) {
-            books[i].style.display = "block"
-        }
-        else {
-            books[i].style.display = "none"
-        }
+search_for = $('#searchbook').val().toLowerCase();
+titles = $('.card-title');
+bookcards = $('.card');
+
+  for (let i=0; i<titles.length; i++){
+    title = titles[i].innerText.toLowerCase();
+    match = title.indexOf(search_for);
+    if (match > -1){
+      bookcards[i].style.display = "block"
     }
+    else{
+          bookcards[i].style.display = "none"
+    }
+  }
 }
+
+const link = document.querySelector("#delete_book");
+link.addEventListener("click", (event) => {
+    response = confirm("Are you sure you want to delete this book?");
+    if  (response){
+        alert("Deleting Book");
+    }
+    else{
+        alert("Aborting!");
+        event.preventDefault();
+        event.stopPropagation();
+    }
+});
 </script>
 {% endblock %}

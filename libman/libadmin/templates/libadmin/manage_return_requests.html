@@ -8,11 +8,11 @@
 {% else %}
 {% for request in requests %}
 <div class="card">
-    <div>
-        <h2>{{ request.request_user}}</h2>
-        <h2>{{ request.request_book_title }}</h2>
-        <p>Book Code: {{ request.request_book_code }}</p>
-        <p><a href="{% url 'confirm_return' request.pk %}">Confirm Return</a></p>
+    <div class="card-body">
+        <h2 class="card-title">{{ request.request_user}}</h2>
+        <h2 class="card-text">{{ request.request_book_title }}</h2>
+        <p class="card-text">Book Code: {{ request.request_book_code }}</p>
+        <a class="btn-primary btn" href="{% url 'confirm_return' request.pk %}">Confirm Return</a>
     </div>
 </div>
 {% endfor %}
