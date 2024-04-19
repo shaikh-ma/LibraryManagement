@@ -160,7 +160,6 @@ def approve_request(request, rqid):
         msg = "Request Approved! Book issued to {}".format(user_req.request_user)
         messages.success(request, msg)
         user_req.delete()
-
     return redirect('manage_requests')
 
 
@@ -179,3 +178,24 @@ def upload_image(image_path, book_code):
 @user_passes_test(is_admin)
 def user_books_admin_view(request, user):
     return render(request, 'libadmin/user_books_admin_view.html', {'userbooks':  Book.objects.filter(issued_to=user)})
+
+
+@user_passes_test(is_admin)
+def manage_penalties(request):
+    import datetime
+    today = datetime.datetime.today()
+
+    books = Book.objects.all()
+    penalities = []
+    unavlbl_books = [book for book in books if not book.is_available]
+    for book in unavlbl_books:
+        if book.returned_date:
+          rd = datetime.datetime(
+              book.returned_date.year, 
+              book.returned_date.month, 
+              book.returned_date.day, 
+          )
+          if rd < today:
+              penalities.append(book)
+        
+    return render(request, 'libadmin/manage_penalties.html', {'books': penalities})

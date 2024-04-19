@@ -12,13 +12,17 @@
   <script src="{% static 'library/nav_tabs.js' %}"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
-  <title>Bookipedia</title>
+  <title>
+  {% block title %} 
+    Bookipedia - 
+  {% endblock %}
+   </title>
 </head>
 <body>
 
   <h1>&nbsp;&nbsp;BOOKIPEDIA</h1>
-  <nav id="nav" class="nav nav-pills nav-justified">
-
+  <br>
+  <nav id="nav" class="nav">
   {% if user.is_authenticated %}
   <a class="nav-item nav-link active" href="{% url 'home' %}">Home</a>
   {% if user.is_superuser %}
@@ -26,6 +30,7 @@
   <a class="nav-item nav-link" href="{% url 'manage_requests' %}">Requests</a>
   <a class="nav-item nav-link" href="{% url 'manage_return_requests' %}">Return Requests</a>
   <a class="nav-item nav-link" href="{% url 'manage_users' %}">Users</a>
+  <a class="nav-item nav-link" href="{% url 'manage_penalties' %}">Penalties</a>
   {% else %}
   <a class="nav-item nav-link" href="{% url 'user-books' username=user %}">My Books</a>
   <a class="nav-item nav-link" href="{% url 'user-requests' username=user %}">My Requests</a>
@@ -35,7 +40,7 @@
   <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
   {% endif %}
 </nav>
-  
+  <br/>
 {% for message in messages %}
   <div class="alert alert-{{ message.tags }}">
     {{ message }}
