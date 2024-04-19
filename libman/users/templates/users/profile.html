@@ -1,9 +1,9 @@
 {% extends "library/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-      <div style="text-align: center;">
+      <div class="table-responsive" style="text-align: center;">
         <img style="width: 150px" class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-        <table style="width: 100%;">
+        <table class="table" style="width: 100%;">
           <tr><td>Username   </td><td> {{ user.username }}</td></tr>
           <tr><td>Email      </td><td> {{ user.email }}</td></tr>
         </table>

@@ -14,17 +14,17 @@
 <br/>
 
 <link rel="stylesheet" href="{% static '/library/css/style.css' %}">
-<div style="text-align: center;width: 100%;">
+<!-- <div style="text-align: center;width: 100%;"> -->
+<div class="alert alert-primary alert-dismissible fade show">
     <form method="POST">
         {% csrf_token %}
-            <img src="{% static 'library/logo.png' %}" style="width:300px;height:100px"/>
+            <img src="{% static 'library/logo.png' %}" class="img-fluid" alt="BOOKIPIDIA" style="width:300px;height:100px"/>
             <h1>BOOKIPIDIA LOGIN</h1>
             <br/>
             {{ form|crispy }}
         <br/>
         <div>
-            <!-- <button id="viewBtn" style="width:100px" type="submit">Login</button> -->
-            <button  style="width:100px" type="submit">Login</button>
+            <button class="btn btn-primary" style="width:100px" type="submit">Login</button>
         </div>
     </form>
     <div class="border-top pt-3">

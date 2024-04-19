@@ -1,12 +1,13 @@
 {% extends 'library/base.html' %}
 {% load static %}
 
+<link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}">
 
 {% block content %}
   <h2>Hello {{ user }}, welcome to Bookipedia!</h2>
   <br/>
 <div style="display: inline;">
-  <a id="viewBtn" href="{% url 'new-user-request' %}">New Book Request</a>
+  <button class="btn btn-primary"><a href="{% url 'new-user-request' %}" style="color: white">New Book Request</a></button>
 </div> 
 <input type="text" id="searchbook" onkeyup="findBook()" placeholder="Search for book.." title="Type in book name">
 
@@ -18,15 +19,15 @@
         <h2>{{ book.title }}</h2>
         <p>{{ book.author }}</p>
         {% if 'book.png' in book.image.url %}
-           <img src="{% static 'library/book.png' %}" alt="{{ book.title }}" id="book_img">
+           <img class="img-fluid" src="{% static 'library/book.png' %}" alt="{{ book.title }}" id="book_img">
         {% else %}
-            <img src="{{ book.image.url }}" alt="{{ book.title }}" id="book_img">
+            <img class="img-fluid" src="{{ book.image.url }}" alt="{{ book.title }}" id="book_img">
         {% endif %}
         <p>Book Code: {{ book.book_code }}</p>
         {% if book.is_available %}
-        <p><a id="viewBtn" href="{% url 'book_detail' book.pk %}">View Book</a></p>
+        <button class="btn btn-primary"><a style="color:white" href="{% url 'book_detail' book.pk %}">View Book</a></button>
         {% else %}
-        <p id="viewBtn" style="color:red;background-color: lightcoral;">Not available</p>
+        <p  style="color:red;background-color: lightcoral;">Not available</p>
         {% endif %}
 
     </div>
