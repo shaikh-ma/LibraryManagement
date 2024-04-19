@@ -5,8 +5,16 @@
   --fontsize: 18px;
   --hovercolor: green
 }
+.card {
+  border: 1px solid var(--background-color);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  display: inline-table;
+  padding: 20px;
+  margin-bottom: 35px;
+  text-align: center;
+}
 
-.title {
+/* .title {
   color: var(--foreground-color);
   font-size: var(--fontsize);
 }
@@ -83,16 +91,8 @@ li a:hover {
   color: white;
 }
 
-.card {
-  border: 1px solid var(--background-color);
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-  display: inline-table;
-  padding: 20px;
-  margin-bottom: 35px;
-  text-align: center;
-}
 
-#viewBtn {
+#viewbtn {
   background-color: var(--background-color);
   color: var(--foreground-color);
   padding: 10px;
@@ -120,4 +120,4 @@ li.a {
 #active{
   background-color: var(--hovercolor);
   color: white;
-}
+} */

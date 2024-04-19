@@ -1,6 +1,14 @@
 {% load static %}
 {% load crispy_forms_tags %}
+
 {% block content %}
+<link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}">
+
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}" role="alert">
+  {{ message }}
+</div>
+{% endfor %}
 <br/>
 <br/>
 <br/>
@@ -15,7 +23,8 @@
             {{ form|crispy }}
         <br/>
         <div>
-            <button id="viewBtn" style="width:100px" type="submit">Login</button>
+            <!-- <button id="viewBtn" style="width:100px" type="submit">Login</button> -->
+            <button  style="width:100px" type="submit">Login</button>
         </div>
     </form>
     <div class="border-top pt-3">
