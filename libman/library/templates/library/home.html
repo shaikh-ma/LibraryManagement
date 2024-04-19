@@ -15,6 +15,7 @@
 <br/>
 <br/>
 
+<div class="container-fluid" style="display:flexbox;">
 {% for book in books %}
 <div class="card" style="width: 18rem;">
   <div class="card-body">
@@ -38,26 +39,25 @@
 </div>
   &nbsp; &nbsp; &nbsp;
   {% endfor %}
+</div>
 
 <script>
 function findBook() {
-var input, filter, table, tr, td, i, txtValue;
-input = document.getElementById("searchbook");
-filter = input.value.toUpperCase();
+search_for = $('#searchbook').val().toLowerCase();
+titles = $('.card-title');
+bookcards = $('.card');
 
-books = document.querySelectorAll(".card-title");
-bookholders = document.querySelectorAll('.card');
-
-for (let i=0; i<books.length;i++){
-  booktitle = books[i].innerText.trim()
-  matchtitle = booktitle.toUpperCase().indexOf(filter) > -1;
-  if (matchtitle ){
-      bookholders[i].style.display = "block"
+for (let i=0; i<titles.length; i++){
+  title = titles[i].innerText.toLowerCase();
+  match = title.indexOf(search_for);
+  if (match > -1){
+    bookcards[i].style.display = "block"
   }
   else{
-      bookholders[i].style.display = "none"
+        bookcards[i].style.display = "none"
   }
 }
+
 }
 </script>
 {% endblock %}

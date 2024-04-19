@@ -1,3 +1,5 @@
+{% extends "library/base.html" %}
+
 {% load crispy_forms_tags %}
 {% block content %}
  <form class="form-control" method="POST">
@@ -6,8 +8,8 @@
          <legend class="border-bottom mb-4">New Request</legend>
          {{ form|crispy }}
          <br/>
-         <input style="background-color: lightgreen;color: white" type="submit"/>
-         <a href="{% url 'home' %}" style="padding:2px; display: inline;background-color: red;color:white">Cancel</a>
+         <button class="btn-primary btn" type="submit">Submit</button>
+         <a href="{% url 'home' %}" class="btn-primary btn">Cancel</a>
      </fieldset>
  </form>
 {% endblock content %}
