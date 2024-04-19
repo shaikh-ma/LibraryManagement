@@ -4,6 +4,7 @@ from libadmin import views as adviews
 
 urlpatterns = [
     path("", views.BookListView.as_view(), name="home"),
+    path("about", views.about_page, name="about"),
     path('user/<str:username>', views.UserBooksListView.as_view(), name='user-books'),
     path('new_request/', views.new_request, name='new-user-request'),
     path('return_request/<int:bookid>', views.request_book_return, name='request-return'),

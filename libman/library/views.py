@@ -142,3 +142,6 @@ def request_book_return(request, bookid):
         form = ReturnRequestForm()
     return render(request, 'library/return_requests.html', {'form': form})
 
+
+def about_page(request):
+    return render(request, 'library/about.html')
