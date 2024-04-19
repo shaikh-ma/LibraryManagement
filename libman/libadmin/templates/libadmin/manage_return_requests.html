@@ -12,9 +12,24 @@
         <h2 class="card-title">{{ request.request_user}}</h2>
         <h2 class="card-text">{{ request.request_book_title }}</h2>
         <p class="card-text">Book Code: {{ request.request_book_code }}</p>
-        <a class="btn-primary btn" href="{% url 'confirm_return' request.pk %}">Confirm Return</a>
+        <a id="confirm_request" class="btn-primary btn" href="{% url 'confirm_return' request.pk %}">Confirm Return</a>
     </div>
 </div>
 {% endfor %}
 {% endif %}
+
+<script>
+const link = document.querySelector("#confirm_request");
+link.addEventListener("click", (event) => {
+    response = confirm("Confirm book received?");
+    if (response) {
+        alert("Updated book status");
+    }
+    else {
+        alert("Aborting!");
+        event.preventDefault();
+        event.stopPropagation();
+    }
+});
+</script>
 {% endblock %}

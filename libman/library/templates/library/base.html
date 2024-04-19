@@ -17,12 +17,12 @@
 <body>
 
   <h1>&nbsp;&nbsp;BOOKIPEDIA</h1>
-  <nav class="nav nav-pills nav-justified">
+  <nav id="nav" class="nav nav-pills nav-justified">
 
   {% if user.is_authenticated %}
   <a class="nav-item nav-link active" href="{% url 'home' %}">Home</a>
   {% if user.is_superuser %}
-  <a class="nav-item nav-link" href="{% url 'manage_books' %}">Books</a>
+  <a onclick="test()" class="nav-item nav-link" href="{% url 'manage_books' %}">Books</a>
   <a class="nav-item nav-link" href="{% url 'manage_requests' %}">Requests</a>
   <a class="nav-item nav-link" href="{% url 'manage_return_requests' %}">Return Requests</a>
   <a class="nav-item nav-link" href="{% url 'manage_users' %}">Users</a>
@@ -31,20 +31,36 @@
   <a class="nav-item nav-link" href="{% url 'user-requests' username=user %}">My Requests</a>
   <a class="nav-item nav-link" href="{% url 'user-return-requests' username=user %}">Return Requests</a>
   <a class="nav-item nav-link" href="{% url 'profile' %}">My Profile</a>
+  {% endif %}
   <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
   {% endif %}
-  {% endif %}
+</nav>
+  
+{% for message in messages %}
+  <div class="alert alert-{{ message.tags }}">
+    {{ message }}
+  </div>
+{% endfor %}
 
-   </nav>
-    
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}">
-      {{ message }}
-    </div>
-    {% endfor %}
-
-  {% block content %}
-   <!-- BLOCK CONTENTS -->
-  {% endblock %}
+{% block content %}
+ <!-- BLOCK CONTENTS -->
+{% endblock %}
+<script>
+function test(){
+  ele = document.getElementsByClassName('active')[0];
+  ele.className = ele.className.replace(' active', '');
+  alert(ele.className)
+  this.className += ' active';
+}
+// var header = document.getElementById("nav");
+// var btns = header.getElementsByClassName("nav-item");
+// for (var i = 0; i < btns.length; i++) {
+//   btns[i].addEventListener("click", function() {
+//   var current = document.getElementsByClassName("active");
+//   current[0].className = current[0].className.replace(" active", "");
+//   this.className += " active";
+//   });
+// }
+</script>
 </body>
 </html>

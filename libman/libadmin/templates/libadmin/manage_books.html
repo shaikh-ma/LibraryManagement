@@ -15,8 +15,8 @@
             <h5 class="card-title">Title : {{ book.title }}</h5>
             <p class="card-text">Author : {{ book.author }}</p>
             <p class="card-text">Book Code : {{ book.book_code }}</p>
-            <p class="card-text">Available : {% if book.is_available %}Yes{% else %}Non{% endif %}</p>
-            {% if issued_to %}
+            <p class="card-text">Available : {% if book.is_available %}Yes{% else %}No{% endif %}</p>
+            {% if book.issued_to %}
             <p class="card-text">Issued To : {{ book.issued_to }}</p>
             <p class="card-text">Issued Date : {{ book.issued_date }}</p>
             <p class="card-text">Return Date : {{ book.returned_date }}</p>

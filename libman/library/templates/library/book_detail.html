@@ -8,7 +8,7 @@
   <tr><td style="padding: 5px">  Title           </td><td> {{ book.title }}</td></tr>
   <tr><td style="padding: 5px">  Author          </td><td> {{ book.author }}</td></tr>
   <tr><td style="padding: 5px">  Book code       </td><td> {{ book.book_code }}</td></tr>
-  <tr><td style="padding: 5px">  Is available    </td><td> {% if book.is_available %} Yes {% else %} Non {% endif %}</td></tr>
+  <tr><td style="padding: 5px">  Is available    </td><td> {% if book.is_available %} Yes {% else %} No {% endif %}</td></tr>
   <tr><td style="padding: 5px">  Date book added </td><td> {{ book.date_book_added }}</td></tr>
   <tr><td style="padding: 5px">  Summary         </td><td> {{ book.summary }}</td></tr>
   {% if user.is_superuser %}
