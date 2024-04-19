@@ -9,9 +9,9 @@
   <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}">
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="{% static 'library/nav_tabs.js' %}"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
-  <script src="/path/to/bootstrap.min.js"></script>
   <title>Bookipedia</title>
 </head>
 <body>
@@ -22,7 +22,7 @@
   {% if user.is_authenticated %}
   <a class="nav-item nav-link active" href="{% url 'home' %}">Home</a>
   {% if user.is_superuser %}
-  <a onclick="test()" class="nav-item nav-link" href="{% url 'manage_books' %}">Books</a>
+  <a class="nav-item nav-link" href="{% url 'manage_books' %}">Books</a>
   <a class="nav-item nav-link" href="{% url 'manage_requests' %}">Requests</a>
   <a class="nav-item nav-link" href="{% url 'manage_return_requests' %}">Return Requests</a>
   <a class="nav-item nav-link" href="{% url 'manage_users' %}">Users</a>
@@ -45,22 +45,5 @@
 {% block content %}
  <!-- BLOCK CONTENTS -->
 {% endblock %}
-<script>
-function test(){
-  ele = document.getElementsByClassName('active')[0];
-  ele.className = ele.className.replace(' active', '');
-  alert(ele.className)
-  this.className += ' active';
-}
-// var header = document.getElementById("nav");
-// var btns = header.getElementsByClassName("nav-item");
-// for (var i = 0; i < btns.length; i++) {
-//   btns[i].addEventListener("click", function() {
-//   var current = document.getElementsByClassName("active");
-//   current[0].className = current[0].className.replace(" active", "");
-//   this.className += " active";
-//   });
-// }
-</script>
 </body>
 </html>
