@@ -1,8 +1,6 @@
-import subprocess, sys, os, csv, shutil
+# -*- coding: utf-8 -*-
+import subprocess, sys, os, csv, shutil, time
 
-import django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'libman.settings')
-django.setup() 
 
 def check_current_path():
     current_folders = os.listdir(os.curdir)
@@ -14,6 +12,7 @@ def check_current_path():
     ]
     if len(missing_folders):
         print("This file is not present in correct folder")
+        time.sleep(10)
         sys.exit()
     return True
 
@@ -29,9 +28,11 @@ def check_python_installed():
             print('✔️  Python 3 is installed')
         else:
             print('❌  Python 3 is not installed.')
+            time.sleep(10)
             sys.exit()
     except Exception as e:
         print('Error: {}'.format(e))
+        time.sleep(10)
         sys.exit()
     return True
 
@@ -40,14 +41,18 @@ def check_python_installed():
 def check_django_installed():
     try:
         import django
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'libman.settings')
+        django.setup() 
     except Exception as e:
         print(e)
+        time.sleep(10)
         sys.exit()
     else:
         version = django.VERSION
         print("✔️  Django - {} is installed".format(django.__version__))
     if version[0] < 3:
         print("❌  Install Django version >= 3.2.25")
+        time.sleep(10)
         sys.exit()
     return True
 
@@ -58,6 +63,7 @@ def install_requirements():
         subprocess.run(command, shell=True)
     except Exception as e:
         print("❌  - {}".format(e))
+        time.sleep(10)
         sys.exit()
     return True
 
@@ -82,7 +88,7 @@ def remove_files(folder_path, ftype="pyc"):
         if filename.endswith('.'+ ftype):
             file_path = os.path.join(folder_path, filename)
             os.remove(file_path)
-            print(f'{file_path} deleted.')   
+            print('{} deleted.'.format(file_path))   
 
 def create_dummy_database():
     if os.path.exists('db.sqlite3'):
@@ -132,3 +138,4 @@ if __name__ == '__main__':
     install_requirements()
     check_database_exists()
     run_project()
+    time.sleep(10)
