@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import subprocess, sys, os, csv, shutil, time
 
 
@@ -19,15 +18,10 @@ def check_current_path():
 
 def check_python_installed():
     try:
-        if 'windows' in sys.platform.lower():
-            output = subprocess.check_output(['where', 'python']).strip().decode()
+        if sys.version_info.major == 3:
+            print('  Python 3 is installed')
         else:
-            output = subprocess.check_output(['which', 'python'], universal_newlines=True)
-
-        if output:
-            print('✔️  Python 3 is installed')
-        else:
-            print('❌  Python 3 is not installed.')
+            print('  Python 3 is not installed.')
             time.sleep(10)
             sys.exit()
     except Exception as e:
@@ -41,17 +35,16 @@ def check_python_installed():
 def check_django_installed():
     try:
         import django
+    except Exception as e:
+        command = "pip install django==3.2.25"
+        subprocess.run(command, shell=True)
+    else:
         os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'libman.settings')
         django.setup() 
-    except Exception as e:
-        print(e)
-        time.sleep(10)
-        sys.exit()
-    else:
         version = django.VERSION
-        print("✔️  Django - {} is installed".format(django.__version__))
+        print("  Django - {} is installed".format(django.__version__))
     if version[0] < 3:
-        print("❌  Install Django version >= 3.2.25")
+        print("  Install Django version >= 3.2.25")
         time.sleep(10)
         sys.exit()
     return True
@@ -62,7 +55,7 @@ def install_requirements():
     try:
         subprocess.run(command, shell=True)
     except Exception as e:
-        print("❌  - {}".format(e))
+        print("  - {}".format(e))
         time.sleep(10)
         sys.exit()
     return True
@@ -70,9 +63,9 @@ def install_requirements():
 def check_database_exists():
     current_folders = os.listdir(os.curdir)
     if 'db.sqlite3' in current_folders:
-        print("✔️  Database exists")
+        print("  Database exists")
     else:
-        print("❌  Database does not exists")
+        print("  Database does not exists")
         print("Creating a new database")
         create_dummy_database()
     return True
@@ -114,17 +107,17 @@ def create_dummy_database():
                 book_code=code,
                 summary=summary)
             b.save()
-            print("✔️  Added Book - {}".format(title))
+            print("  Added Book - {}".format(title))
     from django.contrib.auth import get_user_model
     User = get_user_model()
     User.objects.create_superuser('admin', '', 'admin')
-    print("✔️  Creating Admin credentials")
-    print("✔️  Username - admin")
-    print("✔️  Password - admin")
+    print("  Creating Admin credentials")
+    print("  Username - admin")
+    print("  Password - admin")
         
 
 def run_project():
-    print("✔️  Starting APP")
+    print("  Starting APP")
     subprocess.run("cls", shell=True)
     subprocess.run("python manage.py runserver")
 
