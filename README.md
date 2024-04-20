@@ -4,19 +4,14 @@
 -->
 
 To launch project,
-1.Make sure Python 3.6 is installed.
+1.Make sure Python 3.6 is installed and saved in system variables.
 
 
-2. Start command prompt in libman folder.
-
-
-3. Run below commands,
+2. Run below command in libman folder
    
 ```
-pip install django
+python main.py
 ```
-4. Run command
-```
-python manage.py runserver
-```
+OR
+3. Run main.exe
 
