@@ -17,8 +17,8 @@
 <body>
   <br/>
   <nav id="nav" class="nav nav-tabs nav-stacked fixed-top">
+    <a onclick="test()" class="nav-item nav-link" href="{% url 'home' %}">Home</a>
   {% if user.is_authenticated %}
-  <a onclick="test()" class="nav-item nav-link" href="{% url 'home' %}">Home</a>
   {% if user.is_superuser %}
   <a class="nav-item nav-link" href="{% url 'manage_books' %}">Books</a>
   <a class="nav-item nav-link" href="{% url 'manage_requests' %}">Requests</a>
