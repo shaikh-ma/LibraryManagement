@@ -15,8 +15,8 @@
 <br/>
 <br/>
 
-<!-- <div style="text-align: center;width: 100%;"> -->
-<div class="alert alert-primary alert-dismissible fade show">
+<div style="background-image: url({% static 'library/background.jpg' %});" class="alert alert-primary alert-dismissible fade show">
+<!-- <div class="alert alert-primary alert-dismissible fade show"> -->
     <form class="form-control" method="POST">
         {% csrf_token %}
             <img src="{% static 'library/logo.png' %}" class="img-fluid" alt="BOOKIPIDIA" style="width:300px;height:100px"/>
@@ -27,11 +27,12 @@
         <div>
             <button class="btn btn-primary" style="width:100px" type="submit">Login</button>
         </div>
-    </form>
     <div class="border-top pt-3">
      <p>
     Need An Account? <a href="{% url 'register' %}">Sign Up Now</a>
      </p>
     </div>
+    </form>
 </div>
+<!-- </div> -->
 {% endblock content %}

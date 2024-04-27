@@ -15,7 +15,10 @@
   <a class="btn btn-primary" href="{% url 'new-user-request' %}" style="color: white">New Book Request</a>
 </div> 
 <input type="text" id="searchbook" onkeyup="findBook()" placeholder="Search for book.." title="Type in book name"/>
-
+<br/><br/>
+<p>
+  Total Books: {{ books|length }}
+</p>
 
 <br/>
 <br/>
