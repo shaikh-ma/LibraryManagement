@@ -16,7 +16,7 @@
 </head>
 <body>
   <br/>
-  <nav id="nav" class="nav nav-tabs nav-stacked fixed-top">
+  <nav id="nav" class="nav nav-tabs nav-stacked fixed-top" style="background-color: black;">
     <a onclick="test()" class="nav-item nav-link" href="{% url 'home' %}">Home</a>
   {% if user.is_authenticated %}
   {% if user.is_superuser %}

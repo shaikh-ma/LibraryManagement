@@ -5,13 +5,15 @@
 <br/>
       <div class="table-responsive" style="text-align: center;">
         <img style="width: 150px" class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <br/>
+        <br/>
         <table class="table" style="width: 100%;">
           <tr><td>Username   </td><td> {{ user.username }}</td></tr>
           <tr><td>Email      </td><td> {{ user.email }}</td></tr>
         </table>
        <br/>
-       <a class="btn btn-primary" href="{% url 'home' %}">Back</a>
        <a class="btn btn-primary" href="{% url 'update_password' %}">Change Password</a>
+       <a class="btn btn-primary" href="{% url 'home' %}">Back</a>
        </div>
       </div>
 {% endblock content %}

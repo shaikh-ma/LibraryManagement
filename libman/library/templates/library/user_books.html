@@ -2,9 +2,11 @@
 
 {% block title %} User books {% endblock %}
 {% block content %}
-  <br/>
-  <br/>
-  <br/>
+<br/>
+{% if not books %}
+<div class="alert-primary">No Books yet!</div>
+{% endif %}
+
   {% for book in books %}
   <div class="card">
   <div class="card-body">
