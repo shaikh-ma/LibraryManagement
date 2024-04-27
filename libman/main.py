@@ -11,7 +11,7 @@ def check_current_path():
     ]
     if len(missing_folders):
         print("This file is not present in correct folder")
-        time.sleep(10)
+        time.sleep(5)
         sys.exit()
     else:
         print("File is in correct path")
@@ -23,11 +23,11 @@ def check_python_installed():
             print('Python 3 is installed')
         else:
             print('Python 3 is not installed.')
-            time.sleep(10)
+            time.sleep(5)
             sys.exit()
     except Exception as e:
         print('Error: {}'.format(e))
-        time.sleep(10)
+        time.sleep(5)
         sys.exit()
     return True
 
@@ -46,7 +46,7 @@ def check_django_installed():
         print("  Django - {} is installed".format(django.__version__))
     if version[0] < 3:
         print("  Install Django version >= 3.2.25")
-        time.sleep(10)
+        time.sleep(5)
         sys.exit()
     return True
 
@@ -57,7 +57,7 @@ def install_requirements():
         subprocess.run(command, shell=True)
     except Exception as e:
         print("  - {}".format(e))
-        time.sleep(10)
+        time.sleep(5)
         sys.exit()
     return True
 
@@ -132,4 +132,4 @@ if __name__ == '__main__':
     check_django_installed()
     check_database_exists()
     run_project()
-    time.sleep(10)
+    time.sleep(5)
