@@ -13,15 +13,16 @@ def check_current_path():
         print("This file is not present in correct folder")
         time.sleep(10)
         sys.exit()
-    return True
+    else:
+        print("File is in correct path")
 
 
 def check_python_installed():
     try:
         if sys.version_info.major == 3:
-            print('  Python 3 is installed')
+            print('Python 3 is installed')
         else:
-            print('  Python 3 is not installed.')
+            print('Python 3 is not installed.')
             time.sleep(10)
             sys.exit()
     except Exception as e:
@@ -127,8 +128,8 @@ if __name__ == '__main__':
     print("Checking system requirements")
     check_current_path()
     check_python_installed()
-    check_django_installed()
     install_requirements()
+    check_django_installed()
     check_database_exists()
     run_project()
     time.sleep(10)
