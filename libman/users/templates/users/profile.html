@@ -10,7 +10,8 @@
           <tr><td>Email      </td><td> {{ user.email }}</td></tr>
         </table>
        <br/>
-       <button class="btn btn-primary"><a style="color:white" href="{% url 'home' %}">Back</a></button>
+       <a class="btn btn-primary" href="{% url 'home' %}">Back</a>
+       <a class="btn btn-primary" href="{% url 'update_password' %}">Change Password</a>
        </div>
       </div>
 {% endblock content %}

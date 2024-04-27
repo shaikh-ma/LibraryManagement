@@ -9,6 +9,7 @@ from users import views as user_views
 urlpatterns = [
     path('super_admin/', admin.site.urls, name="admin"),
     path('register/', user_views.register, name='register'),
+    path('update_password/', user_views.update_password, name='update_password'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('profile/', user_views.profile, name='profile'),

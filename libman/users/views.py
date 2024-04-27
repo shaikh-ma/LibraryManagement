@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, UserPasswordForm
 
 
 def register(request):
@@ -20,3 +20,17 @@ def register(request):
 @login_required
 def profile(request):
     return render(request, 'users/profile.html')
+
+
+@login_required
+def update_password(request):
+    if request.method == 'POST':
+        form = UserPasswordForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            return redirect('home')
+    else:
+        form = UserPasswordForm()
+    return render(request, 'users/update_password.html', {'form': form})

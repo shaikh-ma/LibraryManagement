@@ -28,3 +28,18 @@ class UserRegisterForm(UserCreationForm):
             'password1', 
             'password2'
             ]
+
+
+class UserPasswordForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['password']
+
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+        if not password:
+            raise forms.ValidationError("Password is required.")
+        if len(password) < 8:
+            raise forms.ValidationError("Password must be at least 8 characters long.")
+        return password
+    
