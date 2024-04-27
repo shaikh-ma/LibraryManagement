@@ -198,5 +198,4 @@ def manage_penalties(request):
           )
           if rd < today:
               penalities.append(book)
-        
     return render(request, 'libadmin/manage_penalties.html', {'books': penalities})
