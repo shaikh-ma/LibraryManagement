@@ -3,8 +3,9 @@
 {% block content %}
 <br/>
 {% if not requests %}
-<div class="alert-primary">No new request! </div>
-{% else %}
+<div class="alert-primary">No new request!</div>
+{% endif %}
+
 {% for request in requests %}
 <div class="card">
     <div class="card-body">
@@ -16,5 +17,4 @@
     </div>
 </div>
 {% endfor %}
-{% endif %}
 {% endblock %}

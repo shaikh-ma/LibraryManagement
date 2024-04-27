@@ -4,16 +4,15 @@
 
 {% block title %}Home{% endblock %}
 
-{% block heading %}Home{% endblock %}
-
-
 {% block content %}
 <script src="{% static 'library/js/search_books.js' %}"></script>
   <h6>Hello {{ user }}, welcome to Bookipedia!</h6>
   <br/>
+{% if not user.is_superuser %}
 <div style="display: inline;">
   <a class="btn btn-primary" href="{% url 'new-user-request' %}" style="color: white">New Book Request</a>
 </div> 
+{% endif %}
 <input type="text" id="searchbook" onkeyup="findBook()" placeholder="Search for book.." title="Type in book name"/>
 <br/><br/>
 <p>

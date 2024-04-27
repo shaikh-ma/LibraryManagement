@@ -35,7 +35,7 @@ def manage_return_requests(request):
 @user_passes_test(is_admin)
 def manage_users(request):
     users = User.objects.all()
-    books = Book.objects.filter()
+    # books = Book.objects.filter()
     return render(request, 'libadmin/manage_users.html', {'users': users})
 
 
@@ -144,7 +144,7 @@ def confirm_return(request, rqid):
         else:
             err = "Book not found!"
             messages.error(request, err)
-    return redirect('home')
+    return redirect('manage_return_requests')
 
 @user_passes_test(is_admin)
 def approve_request(request, rqid):
