@@ -95,7 +95,7 @@ def create_dummy_database():
     subprocess.run('python manage.py makemigrations')
     subprocess.run('python manage.py migrate')
 
-    with open('dummy.csv', mode="r") as csv_file:
+    with open('books.csv', mode="r") as csv_file:
         csv_reader = csv.reader(csv_file)
         for row in csv_reader:
             code = row[0].strip()
