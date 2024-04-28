@@ -1,6 +1,9 @@
 {% extends "library/base.html" %}
 
 {% load crispy_forms_tags %}
+{% block title %} EDIT BOOK {% endblock %}
+{% block heading %} EDIT BOOK {% endblock %}
+{% block content %}
 {% block content %}
  <form class="form-control" method="POST">
      {% csrf_token %}

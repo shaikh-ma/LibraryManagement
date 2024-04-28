@@ -51,7 +51,7 @@ def new_request(request):
             except IndexError:
                 err = "Book code '{}' does not exists!".format(book_id)
                 messages.error(request, err)
-                return redirect('home')
+                return redirect('user-requests', username=request.user  )
 
             if not book_details['is_available']:
                 messages.error(request,"Book not available")
@@ -62,7 +62,6 @@ def new_request(request):
                 err = "Request already exists!"
                 messages.error(request, err)
                 return redirect('user-requests', username=request.user  )
-                # return redirect('home')
 
             book_request = form.save(commit=False)
             book_request.request_user = request.user
