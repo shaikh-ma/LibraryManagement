@@ -15,8 +15,7 @@
   <title>{% block title %}{% endblock %}</title>
 </head>
 <body style="margin: 10px">
-
-  <nav id="nav" class="nav fixed-top">
+  <nav id="nav" class="nav">
     <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
     {% if user.is_authenticated %}
     {% if user.is_superuser %}
@@ -31,12 +30,11 @@
      <a class="nav-item nav-link" href="{% url 'user-return-requests' username=user %}">Return Requests</a>
     {% endif %}
       <!-- <a class="nav-item nav-link" href="{% url 'profile' %}">My Profile</a> -->
-     <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
      <a class="nav-item nav-link" href="{% url 'profile' %}">Profile: {{ user.username}}</a>
+     <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
     {% endif %}
      <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
 </nav>
-  <br/>
   <br/>
   <br/>
   <h1>{% block heading %} {% endblock %}</h1>
