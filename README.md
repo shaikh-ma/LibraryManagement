@@ -33,6 +33,7 @@ class Book
     image
 ```
 <br/>
+
 ```
 class Request
     request_id
@@ -45,6 +46,7 @@ class Request
     is_approved
 ```
 <br/>
+
 ```
 class ReturnRequest
     request_id
@@ -56,6 +58,7 @@ class ReturnRequest
     is_approved
 ```
 <br/>
+
 ```
 class Profile
     user
@@ -64,4 +67,5 @@ class Profile
     icard_no
     class_div
 ```
+
 <br/>
