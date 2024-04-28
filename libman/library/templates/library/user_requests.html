@@ -2,6 +2,12 @@
 
 {% block title %} User requests {% endblock %}
 {% block content %}
+{% if not user.is_superuser %}
+<div style="display: inline;">
+  <a class="btn btn-primary" href="{% url 'new-user-request' %}" style="color: white">New Book Request</a>
+</div>
+{% endif %}
+<br/>
 <br/>
 {% if not requests %}
 <div class="alert-primary">No new request!</div>
@@ -23,8 +29,8 @@
      <td>{{ request.request_user  }}</td>
      <td>{{ request.request_book_title }}</td>
      <td>{{ request.request_book_code }}</td>
-     <td>{{ request.request_date }}</td>
-     <td>{{ request.return_date }}</td>
+     <td>{{ request.request_date| date:"d-m-Y" }}</td>
+     <td>{{ request.return_date| date:"d-m-Y" }}</td>
      <td>
       {% if request.is_approved %}
        Approved 

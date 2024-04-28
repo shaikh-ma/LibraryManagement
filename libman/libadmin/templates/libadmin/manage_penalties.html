@@ -1,6 +1,9 @@
 {% extends "library/base.html" %}
 
 {% block content %}
+{% if not books %}
+<div class="alert-primary">No penalties yet!</div>
+{% endif %}
 <br/>
 <br/>
 {% for book in books %}
@@ -11,11 +14,10 @@
       <p class="card-text">Book Code : {{ book.book_code }}</p>
       <p class="card-text">Available : {% if book.is_available %}Yes{% else %}No{% endif %}</p>
       <p class="card-text">Issued To : {{ book.issued_to }}</p>
-      <p class="card-text">Issued Date : {{ book.issued_date }}</p>
-      <p class="card-text">Return Date : {{ book.returned_date }}</p>
+      <p class="card-text">Issued Date : {{ book.issued_date| date:"d-m-Y" }}</p>
+      <p class="card-text">Return Date : {{ book.returned_date| date:"d-m-Y" }}</p>
     <br/>
     </div>
 </div>
 {% endfor %}
-
 {% endblock %}

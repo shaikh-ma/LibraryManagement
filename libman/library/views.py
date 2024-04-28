@@ -54,15 +54,15 @@ def new_request(request):
                 return redirect('home')
 
             if not book_details['is_available']:
-                err = "Book not available"
-                messages.error(request, err)
-                return redirect('home')
+                messages.error(request,"Book not available")
+                return redirect('user-requests', username=request.user  )
 
             existing = Request.objects.filter(request_book_code=book_details['book_code'])
             if len(existing.values()):
                 err = "Request already exists!"
                 messages.error(request, err)
-                return redirect('home')
+                return redirect('user-requests', username=request.user  )
+                # return redirect('home')
 
             book_request = form.save(commit=False)
             book_request.request_user = request.user
@@ -76,7 +76,6 @@ def new_request(request):
     else:
         form = RequestForm()
     return render(request, 'library/requests.html', {'form': form})
-
 
 
 class BookDetailView(DetailView):
@@ -97,8 +96,6 @@ class RequestDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
-
-
 
 
 

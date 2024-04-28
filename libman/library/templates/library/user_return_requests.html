@@ -21,7 +21,7 @@
      <td>{{ request.request_user  }}</td>
      <td>{{ request.request_book_title }}</td>
      <td>{{ request.request_book_code }}</td>
-     <td>{{ request.request_date }}</td>
+     <td>{{ request.request_date| date:"d-m-Y" }}</td>
      <td>
       {% if request.is_approved %}
        Approved 

@@ -35,8 +35,8 @@ def manage_return_requests(request):
 @user_passes_test(is_admin)
 def manage_users(request):
     users = User.objects.all()
-    # books = Book.objects.filter()
-    return render(request, 'libadmin/manage_users.html', {'users': users})
+    books = Book.objects.filter()
+    return render(request, 'libadmin/manage_users.html', {'users': users, 'books': books})
 
 
 @user_passes_test(is_admin)

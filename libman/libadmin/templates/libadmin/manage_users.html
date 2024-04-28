@@ -1,16 +1,26 @@
 {% extends "library/base.html" %}
 
 {% block content %}
+Total users registered : {{ users|length }}
+<br/>
+<br/>
+<br/>
 
 {% for user in users %}
+{% if not user.is_superuser %}
 <div class="card">
     <div class="card-body">
-        <p class="card-title">{{ user }}</p>
+        <h1>{{ user|title }}</h1>
+        <p class="card-text">Email: {{ user.email }}</p>
+        <p class="card-text">Date Joined: {{ user.date_joined| date:"d-m-Y" }}</p>
+        <!-- <p class="card-text">Total books borrowed:</p>
+        <p class="card-text">Total books penalties:</p> -->
         {% if not user.is_superuser %}
         <a id="delete_user" class="btn-primary btn" href="{% url 'delete_user' user.pk %}">Delete</a>
         {% endif %}
     </div>
 </div>
+{% endif %}
 {% endfor %}
 
 <script>

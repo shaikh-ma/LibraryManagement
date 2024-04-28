@@ -21,8 +21,8 @@
             <p class="card-text">Available : {% if book.is_available %}Yes{% else %}No{% endif %}</p>
             {% if book.issued_to %}
             <p class="card-text">Issued To : {{ book.issued_to }}</p>
-            <p class="card-text">Issued Date : {{ book.issued_date }}</p>
-            <p class="card-text">Return Date : {{ book.returned_date }}</p>
+            <p class="card-text">Issued Date : {{ book.issued_date| date:"d-m-Y" }}</p>
+            <p class="card-text">Return Date : {{ book.returned_date| date:"d-m-Y" }}</p>
             {% endif %} 
         <br/>
         <a class="btn-primary btn" href="{% url 'edit_book' book.pk %}">Edit Book</a>
