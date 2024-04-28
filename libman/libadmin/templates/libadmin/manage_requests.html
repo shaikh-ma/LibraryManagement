@@ -11,8 +11,8 @@
 {% for request in requests %}
 <div class="card">
     <div class="card-body">
-        <h2 class="card-title">{{ request.request_user}}</h2>
-        <h2 class="card-text">{{ request.request_book_title }}</h2>
+        <h2 class="card-text">{{ request.request_book_title| title }}</h2>
+        <h4 class="card-title">{{ request.request_user| title }}</h4>
         <p class="card-text">Book Code: {{ request.request_book_code }}</p>
         <a class="btn-primary btn" href="{% url 'approve_request' request.pk %}">Approve</a>
         <a class="btn-primary btn" href="{% url 'delete_request' request.pk %}">Delete</a>

@@ -1,4 +1,4 @@
-import subprocess, sys, os, csv, shutil, time
+import subprocess, sys, os, csv, shutil, time, webbrowser
 
 
 def check_current_path():
@@ -119,6 +119,7 @@ def create_dummy_database():
 
 def run_project():
     print("  Starting APP")
+    webbrowser.open("http://127.0.0.1:8000/")
     subprocess.run("cls", shell=True)
     subprocess.run("python manage.py runserver")
 
