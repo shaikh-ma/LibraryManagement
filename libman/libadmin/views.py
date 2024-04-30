@@ -164,17 +164,17 @@ def approve_request(request, rqid):
     return redirect('manage_requests')
 
 
-def upload_image(image_path, book_code):
-    with open(image_path, 'rb') as f:
-        call_command(
-            'shell',
-            '--command', 
-            f'''
-            from library.models import Book; 
-            Book.objects.filter(book_code={book_code}).update(image_field=File(f))'
-            '''
-        )
-
+# def upload_image(image_path, book_code):
+#     with open(image_path, 'rb') as f:
+#         call_command(
+#             'shell',
+#             '--command', 
+#             f'''
+#             from library.models import Book; 
+#             Book.objects.filter(book_code={book_code}).update(image_field=File(f))'
+#             '''
+#         )
+# 
 
 @user_passes_test(is_admin)
 def user_books_admin_view(request, user):
