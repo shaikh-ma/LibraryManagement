@@ -1,17 +1,17 @@
 {% extends "library/base.html" %}
+
 {% block title %} MANAGE USERS {% endblock %}
 {% block heading %} MANAGE USERS {% endblock %}
 {% block content %}
-Total users registered : {{ users|length }}
-<br/>
-<br/>
-<br/>
+<p id="user_detail">Total users registered (including admin) : {{ users|length }}</p>
 
+<br/>
+<input type="text" id="searchuser" onkeyup="findUser()" placeholder="Search for user.." title="Type in user name" />
 {% for user in users %}
 {% if not user.is_superuser %}
 <div class="card">
     <div class="card-body">
-        <h1>{{ user|title }}</h1>
+        <h1 class="card-title">{{ user.username|title }}</h1>
         <p class="card-text">Email: {{ user.email }}</p>
         <p class="card-text">Date Joined: {{ user.date_joined| date:"d-m-Y" }}</p>
         <!-- <p class="card-text">Total books borrowed:</p>
@@ -37,5 +37,22 @@ link.addEventListener("click", (event) => {
         event.stopPropagation();
     }
 });
+
+function findUser() {
+    search_for = $('#searchuser').val().toLowerCase();
+    titles = $('.card-title');
+    console.log(titles)
+    usercards = $('.card');
+    for (let i = 0; i < titles.length; i++) {
+        title = titles[i].innerText.toLowerCase();
+        match = title.indexOf(search_for);
+        if (match > -1) {
+            usercards[i].style.display = "block"
+        }
+        else {
+            usercards[i].style.display = "none"
+        }
+    }
+}
 </script>
 {% endblock %}
