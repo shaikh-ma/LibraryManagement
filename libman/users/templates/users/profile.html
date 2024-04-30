@@ -10,7 +10,9 @@
         <br/>
         <table class="table" style="width: 100%;">
           <tr><td>Username   </td><td> {{ user.username }}</td></tr>
+          {% if user.email %}
           <tr><td>Email      </td><td> {{ user.email }}</td></tr>
+          {% endif %}
         </table>
        <br/>
        <a class="btn btn-primary" href="{% url 'update_password' %}">Change Password</a>

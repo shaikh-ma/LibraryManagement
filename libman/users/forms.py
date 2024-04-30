@@ -13,12 +13,21 @@ CHOICE_TYPE =(
 def validate_mobile_number(mob_number):
     if not mob_number.isdigit():
         raise ValidationError("Invalid mobile number")
+    
+def validate_existing_user(email):
+    if User.objects.filter(email=email):
+        raise ValidationError("User with this emails address already exists.")
+    # 
+# def validate_icardno(username, number):
+    # if User.objects.get(icard_no=number):
+        # raise ValidationError("User with this icard already exists.")
 
+                        
 class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField()
+    email = forms.EmailField(validators=[validate_existing_user])
     mobile_number = forms.CharField(max_length=10, min_length=10, validators=[validate_mobile_number])
     user_type = forms.ChoiceField(choices=CHOICE_TYPE)
-    icard_no = forms.IntegerField()
+    icard_no = forms.IntegerField() #validators=[validate_icardno])
 
     class Meta:
         model = User

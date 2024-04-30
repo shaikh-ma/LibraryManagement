@@ -6,7 +6,8 @@
 <h2>You have been logged out</h2>
 <div class="border-top pt-3">
     <small class="text-muted" style="color:white;"">
-        <a href="{% url 'login' %}">Log In Again</a>
+        <a class="btn-primary btn" href="{% url 'login' %}">Log In</a>
+        <a class="btn-primary btn" href="{% url 'register' %}">Sign Up</a>
     </small>
 </div>
 {% endblock content %}
