@@ -4,12 +4,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 CHOICE_TYPE =(
-("1", "First Year Student"),
-("2", "Second Year Student"),
-("3", "Third Year Student"),
-("4", "Professor"),
-("5", "Library Staff"),
-("6", "Other"),
+("1", "Student"),
+("2", "Professor"),
+("3", "Library Staff"),
+("4", "Other"),
 )
 
 def validate_mobile_number(mob_number):

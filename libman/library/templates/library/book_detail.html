@@ -16,9 +16,12 @@
   {% if user.is_superuser %}
     <tr><td style="padding: 5px"> Issued To </td><td> {{ book.issued_to }}</td></tr>
     <tr><td style="padding: 5px"> Date Issued  </td><td> {{ book.issued_date| date:"d-m-Y" }}</td></tr>
-    <tr><td style="padding: 5px"> Expected Return Date</td><td> {{ book.returned_date| date:"d-m-Y" }}</td></tr>
-  {% else %}
-    <tr><td style="padding: 5px">Return Date</td><td> {{ book.returned_date| date:"d-m-Y" }}</td></tr>
+  {% endif %}
+  {% if not book.is_available %}
+    <tr>
+      <td style="padding: 5px"> Expected Return Date</td>
+      <td> {{ book.returned_date| date:"d-m-Y" }}</td>
+    </tr>
   {% endif %}
 </table>
 <br/>

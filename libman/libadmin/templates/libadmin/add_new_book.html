@@ -1,5 +1,8 @@
+{% extends 'library/base.html' %}
 {% load crispy_forms_tags %}
 
+{% block title %}ADD BOOK{% endblock %}
+{% block heading %}ADD BOOK{% endblock %}
 {% block content %}
  <form class="form-control" method="POST">
      {% csrf_token %}
@@ -7,8 +10,8 @@
          <legend class="border-bottom mb-4">New Book</legend>
          {{ form|crispy }}
          <br/>
-         <input style="background-color: lightgreen;color: white" type="submit"/>
-         <a href="{% url 'home' %}" style="padding:2px; display: inline;background-color: red;color:white">Cancel</a>
+         <button class="btn btn-primary" type="submit">Submit</button>
+         <a class="btn btn-primary" href="{% url 'home' %}">Cancel</a>
      </fieldset>
  </form>
 {% endblock content %}

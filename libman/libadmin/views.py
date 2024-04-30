@@ -5,9 +5,9 @@ from django.contrib import messages
 from django.utils import timezone
 from library.forms import BookForm, BookEditForm
 
-from django.core.files import File
-from django.core.files.storage import FileSystemStorage
-from django.core.management import call_command
+# from django.core.files import File
+# from django.core.files.storage import FileSystemStorage
+# from django.core.management import call_command
 
 def is_admin(user):
     return user.is_superuser
@@ -119,7 +119,7 @@ def approve_book_return(request, rqid):
         book.is_available = True
         book.save()
         user_req.save()
-        msg = "Request Approved! Book issued to {}".format(user_req.request_user)
+        msg = "Request Approved! Book issued to '{}'".format(user_req.request_user)
         messages.success(request, msg)
         user_req.delete()
     return redirect('home')

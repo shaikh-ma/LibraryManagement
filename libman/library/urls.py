@@ -28,5 +28,4 @@ urlpatterns = [
     path('return/<int:pk>', adviews.ReturnRequest, name='approve_book_return'),
     path('admin/return/requests/<int:rqid>/confirm', adviews.confirm_return, name='confirm_return'),
     path('user_books_admin/<str:user>/', adviews.user_books_admin_view, name='user-books-admin-view'),
-    path("profile/<str:username>/", usviews.ProfileDetailView.as_view(), name="profile"),
 ]

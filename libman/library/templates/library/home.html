@@ -37,11 +37,10 @@
     {% if book.summary %}
     <p class="card-text">{{ book.summary }}</p>
     {% endif %}
-    {% if book.is_available %}
-    <a href="{% url 'book_detail' book.pk %}" class="btn btn-primary">View Book</a>
-    {% else %}
-    <a href="" class="btn btn-secondary disabled">Book Not Available</a>
+    {% if not book.is_available %}
+    <p><a href="" class="btn btn-secondary disabled">Book Not Available</a></p>
     {% endif %}
+    <p><a href="{% url 'book_detail' book.pk %}" class="btn btn-primary">View Book</a></p>
   </div>
 </div>
   &nbsp; &nbsp; &nbsp;

@@ -7,11 +7,10 @@
 <table class="table"  style="width:100%;">
     <tr><td>Request id</td><td>{{ request.request_id }}</td></tr>
     <tr><td>Username</td><td>{{ request.request_user }}</td></tr>
-    <tr><td>Book Name</td><td>{{ request.request_book }}</td></tr>
     <tr><td>Book Title</td><td>{{ request.request_book_title }}</td></tr>
     <tr><td>Book code</td><td>{{ request.request_book_code }}</td></tr>
     <tr><td>Request Date</td><td>{{ request.request_date| date:"d-m-Y" }}</td></tr>
-    <tr><td>Return Date</td><td>{{ request.request_date| date:"d-m-Y" }}</td></tr>
+    <tr><td>Return Date</td><td>{{ request.return_date| date:"d-m-Y" }}</td></tr>
     <tr><td>Request status</td><td>{% if request.is_approved %}Approved {% else %} Not approved {% endif %}</td></tr>
 </table>
 <br/>
