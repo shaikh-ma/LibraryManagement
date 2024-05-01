@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from .forms import UserRegisterForm, UserPasswordForm
 
 
@@ -9,13 +8,7 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            fobj = form.save(commit=False)
-            cd = form.cleaned_data
-            existing_nos = [x.icard_no for x in User.objects.all()]
-            if cd['icard_no'] in existing_nos:
-                messages.error(request, f'Icard already exists')
-                return redirect('login')
-            fobj.save()
+            form.save()
             messages.success(request, f'Your account has been created! You are now able to log in')
             return redirect('login')
     else:
