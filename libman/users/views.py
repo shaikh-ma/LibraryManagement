@@ -8,6 +8,10 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
+            # user = request.user
+            # user.icard_no  = form.cleaned_data['icard_no']
+            # user.mobile_number  = form.cleaned_data['mobile_number']
+            # user.save()
             form.save()
             messages.success(request, f'Your account has been created! You are now able to log in')
             return redirect('login')

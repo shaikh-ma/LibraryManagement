@@ -108,13 +108,20 @@ def create_dummy_database():
                 book_code=code,
                 summary=summary)
             b.save()
-            print("  Added Book - {}".format(title))
+            print("  Adding Book - {}".format(title))
     from django.contrib.auth import get_user_model
     User = get_user_model()
-    User.objects.create_superuser('admin', '', 'admin')
+    User.objects.create_superuser('admin', 'admin@example.com', 'admin')
     print("  Creating Admin credentials")
     print("  Username - admin")
     print("  Password - admin")
+    from django.contrib.auth.models import User
+    for i in range(1, 21):
+        print(f"   Adding User{i} - password123")
+        u = User.objects.create_user(f'user{i}', f'user{i}@example.com', 'password123')
+        u.save()
+
+
         
 
 def run_project():

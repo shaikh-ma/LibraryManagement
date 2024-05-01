@@ -17,10 +17,6 @@ def validate_mobile_number(mob_number):
 def validate_existing_user(email):
     if User.objects.filter(email=email):
         raise ValidationError("User with this emails address already exists.")
-    # 
-# def validate_icardno(username, number):
-    # if User.objects.get(icard_no=number):
-        # raise ValidationError("User with this icard already exists.")
 
                         
 class UserRegisterForm(UserCreationForm):
