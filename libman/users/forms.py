@@ -20,14 +20,18 @@ def validate_existing_user(email):
 
                         
 class UserRegisterForm(UserCreationForm):
+    firstname  = forms.CharField(max_length=200)
+    lastname  = forms.CharField(max_length=200)
     email = forms.EmailField(validators=[validate_existing_user])
     mobile_number = forms.CharField(max_length=10, min_length=10, validators=[validate_mobile_number])
     user_type = forms.ChoiceField(choices=CHOICE_TYPE)
-    icard_no = forms.IntegerField() #validators=[validate_icardno])
+    icard_no = forms.IntegerField()
 
     class Meta:
         model = User
         fields = [
+            'firstname',
+            'lastname',
             'username', 
             'email', 
             'mobile_number',
