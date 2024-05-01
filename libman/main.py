@@ -1,4 +1,4 @@
-import subprocess, sys, os, csv, shutil, time, webbrowser
+import subprocess, sys, os, csv, shutil, time, webbrowser, random
 
 
 def check_current_path():
@@ -116,10 +116,13 @@ def create_dummy_database():
     print("  Username - admin")
     print("  Password - admin")
     from django.contrib.auth.models import User
-    for i in range(1, 21):
-        print(f"   Adding User{i} - password123")
-        u = User.objects.create_user(f'user{i}', f'user{i}@example.com', 'password123')
-        u.save()
+    with open('random_users.csv', mode="r") as csv_file:
+        csv_reader = csv.reader(csv_file)
+        for row in csv_reader:
+            user = row[0].strip() + str(random.randint(100, 1000))
+            print(f"   Adding User {user} - password123")
+            u = User.objects.create_user(user, f'{user}@example.com', 'password123')
+            u.save()
 
 
         
