@@ -12,6 +12,5 @@ for (let i=0; i<titles.length; i++){
   else{
         bookcards[i].style.display = "none"
   }
-}
-
+  }
 }
