@@ -30,9 +30,9 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = [
+            'username', 
             'firstname',
             'lastname',
-            'username', 
             'email', 
             'mobile_number',
             'password1', 
