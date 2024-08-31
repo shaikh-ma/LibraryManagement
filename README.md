@@ -1,71 +1,25 @@
-# Library Management Application
-<!--
-![image](https://github.com/shaikh-ma/LibraryManagement/assets/88078876/2ee9af48-241d-4396-a354-b8365119e165)
--->
+# Library Management Application - BOOKIPEDIA
 
-To launch project,
+A comprehensive web-app for Library management, created using DJango. Supports features login, Signup, reset pasword, Admin login, and many more.
+
+## Sign-Up
+![new_account](https://github.com/user-attachments/assets/53fce076-3b35-49e2-8d64-5305ea2d0a90)
+
+## Login
+![login](https://github.com/user-attachments/assets/fa6f9ed1-e874-4ae8-8b66-c17393513df3)
+
+## Home-page
+![home_page](https://github.com/user-attachments/assets/d11e9d7c-c183-43b9-ac1e-196ca50cb052)
+
+## Logout
+![logout](https://github.com/user-attachments/assets/07754417-9ff0-4d0d-8b8b-08fb4039185e)
+
+
+# To launch project in browser:
 1.Make sure Python 3.6 is installed and saved in system variables.
-
-
-2. Run below command in libman folder
-   
+2. Run below command in libman folder  
 ```
 python main.py
 ```
 OR
 3. Run main.exe
-
-## Additional Info:
-<h1>Below are the classes used in this project</h1>
-
-```
-class Book
-    book_id
-    title
-    author
-    issued_to
-    is_available
-    issued_date
-    returned_date
-    date_book_added
-    book_code
-    summary
-    image
-```
-<br/>
-
-```
-class Request
-    request_id
-    request_user
-    request_book
-    request_book_title
-    request_book_code
-    request_date
-    return_date
-    is_approved
-```
-<br/>
-
-```
-class ReturnRequest
-    request_id
-    request_user
-    request_book
-    request_book_title
-    request_book_code
-    request_date
-    is_approved
-```
-<br/>
-
-```
-class Profile
-    user
-    image
-    roll_no
-    icard_no
-    class_div
-```
-
-<br/>
