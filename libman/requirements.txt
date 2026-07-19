@@ -1,6 +1,7 @@
 pillow
-Django==3.2.25
+Django
 django-bootstrap5
 django-crispy-forms
 django-password-reset
 gunicorn
+crispy_forms
