@@ -1,4 +1,5 @@
-Django
+pillow
+Django==3.2.25
 django-bootstrap5
 django-crispy-forms
 django-password-reset
