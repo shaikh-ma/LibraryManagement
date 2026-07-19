@@ -1,8 +1,8 @@
-FROM python:slim as python
+FROM python:slim
 
-WORKDIR ./app
+WORKDIR /app
 
-COPY ./libman ./app
+COPY ./libman /app
 
 CMD ['python', 'manage.py' , 'runserver']
 
