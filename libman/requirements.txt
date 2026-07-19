@@ -4,4 +4,4 @@ django-bootstrap5
 django-crispy-forms
 django-password-reset
 gunicorn
-crispy_forms
+crispy-bootstrap4
